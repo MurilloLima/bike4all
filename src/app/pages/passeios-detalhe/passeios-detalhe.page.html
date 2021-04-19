@@ -1,0 +1,251 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-button>
+        <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Passeios</ion-title>
+    
+    <ion-buttons slot="end" *ngIf="cadastro.privacidade=='publico' || (cadastro.admin==1 && cadastro.privacidade!='publico')">
+      <ion-button  title="Compartilhar" (click)="compartilhar();">
+         <i class="fa fa-share-alt"></i>
+      </ion-button>
+   </ion-buttons>   
+    <ion-buttons slot="end" *ngIf="(cadastro.admin==0 && cadastro.participa==1)">
+      <ion-button  title="Sair" (click)="sair()">
+        <img src="/assets/images/sair.png" alt="sair" style="width: 20px;" />
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end" *ngIf="cadastro.admin==1">
+      <ion-button  title="Configurações" onclick="incluirMarcacao('#configuracoesPasseio');">
+        <img src="/assets/images/editar.svg" alt="Configurações" />
+      </ion-button>
+    </ion-buttons>      
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+<!-- CONTENT -->
+
+<section class="content content-gray content-atividades content-passeios">      
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades">    
+    <!-- ATIVIDADE COMPLEXA -->
+     <div class="atividade atividade-complexa" data-local="Passeio final da primavera - Parque Celseo Daniel, Santo André">
+         <div class="capa-atividade"
+         [style.backgroundImage]="'url(' + (cadastro.urlimagem!=undefined?cadastro.urlimagem:'') + ')'" 
+          style="background-color: #f2f2f2; background-repeat:  no-repeat;;background-size: cover;background-position: center center;">
+             <span>{{cadastro.distancia}} km</span>           
+         </div>
+         <h2>
+           {{cadastro.titulo}}
+           <small>{{cadastro.descricao}}</small>
+         </h2>
+
+         <p *ngIf="cadastro.admin==0 && cadastro.participa==0">
+            <a href="javascript:void(0)" (click)="ingressar()" class="btn btn-primary btn-degrade" title="INGRESSAR NO PASSEIO">INGRESSAR NO PASSEIO</a>
+         </p>        
+         
+         <p *ngIf="cadastro.inicia==1 && (cadastro.admin==1 || cadastro.participa==1)">
+          <a href="javascript:void(0)" (click)="iniciarPasseio()" class="btn btn-primary btn-degrade">INICIAR PASSEIO</a>
+        </p>     
+     </div>
+     <!-- ATIVIDADE COMPLEXA -->           
+  </div>
+  <!-- LOOP ATIVIDADES -->
+
+  <!-- DETALHES DA AIVIDADE/PASSEIO -->
+  <div class="detalhes-atividade" style="margin-top: -35px;">
+   
+      <div class="row linha linha-um">
+        <div class="col-2">
+            <img src="/assets/images/golden-map-marker.svg" alt="Endereço">
+        </div>
+        <div class="col-10">
+          <p>{{cadastro.endereco}}</p>
+        </div>
+        
+        <img src="/assets/images/golden-directions.svg" alt="Directions" class="directions" (click)="abrirGPS()"> 
+
+      </div>
+
+      <!-- LINHA -->
+      <div class="row linha linha-dois">
+         <div class="col-2">
+             <img src="/assets/images/golden-calendar.svg" alt="Calendário">
+         </div>
+        <div class="col-10">
+           <p>{{cadastro.data}} - início às {{cadastro.horario}}</p>
+         </div>
+      </div>
+      <!-- LINHA --> 
+
+      <!-- LINHA -->
+      <div class="row linha linha-tres">
+         <div class="col-2">
+             <img src="/assets/images/golden-bike.svg" alt="Número de pessoas que ingressaram">
+         </div>
+         <div class="col-10">
+           <p><span>{{cadastro.participantes}}</span> ingressaram  <!--•  <span>1</span> compartilhamento--></p>
+         </div>
+      </div>
+      <!-- LINHA --> 
+
+
+      <!-- LINHA -->
+      <div class="row linha linha-quatro">
+         <div class="col-2">
+             <img src="/assets/images/golden-clima.svg" alt="Clima no dia da atividade">
+         </div>
+         <div class="col-10">
+           <p><span>{{cadastro.previsaotempo}}°C</span> - {{cadastro.previsaoceu}} </p>
+         </div>
+      </div>
+      <!-- LINHA --> 
+
+
+
+
+  </div>
+  <!-- DETALHES DA AIVIDADE/PASSEIO -->
+
+  <!-- OUTROS DADOS DO PASSEIO -->
+  <h3 class="subtitulo" style="margin-bottom: 22px;margin-top:41px">Detalhes do percurso</h3>
+  <div class="outros-dados-do-passeio">
+      <!-- LINHA DE DETALHE -->
+      <div class="row linha-detalhes">
+          <div class="col-6 coluna-um">
+             Nível de dificuldade
+          </div>
+          <div class="col-6 coluna-dois">
+             <button type="button" class="btn btn-primary btn-degrade" style="font-size: 13px !important;">{{cadastro.niveldificuldade}}</button>
+          </div>
+      </div>
+      <div class="row linha-detalhes">
+         <div class="col-6 coluna-um">
+             Tipo de terreno
+          </div>
+          <div class="col-6 coluna-dois">
+             <button type="button" class="btn btn-default"><img src="/assets/images/{{cadastro.tipoterreno}}-ativo.svg" alt="Tipo de terreno"> {{cadastro.tipoterreno}}</button>
+          </div>
+      </div>
+      <!-- LINHA DE DETALHE -->
+      <!-- TABELA DE ESTATISTICAS -->
+      <div class="graficos">
+          <table class="table">
+              
+              <tbody>
+                  <tr>
+                    <td>Distância</td>
+                    <td>{{cadastro.distancia}} km</td>
+                  </tr>
+                  <tr>
+                    <td>Duração aprox.</td>
+                    <td>{{convertTempo(cadastro.tempo,'horas')}}</td>
+                  </tr>
+                  <tr>
+                    <td>Maior elevação</td>
+                    <td>{{cadastro.maiorelevacao}} m</td>
+                  </tr>
+                  <tr>
+                    <td>Menor elevação</td>
+                    <td>{{cadastro.menorelevacao}} m</td>
+                  </tr>
+              </tbody>
+          </table>
+      </div>
+      <!-- TABLE DE ESTATISTICAS -->
+      <!-- GRAFICO -->
+      <div class="grafico">
+        <canvas id="graficoElevacaoPasseio" style="width: 94%;height: auto"></canvas>
+      </div>
+      <!-- GRAFICO -->
+  </div>
+  <!-- OUTROS DADOS DO PASSEIO -->
+
+
+  <!-- INFORMAÇÕES ADICIONAIS -->
+  <h3 class="subtitulo" style="margin-bottom: 22px;margin-top:31px">Informações adicionais</h3>
+  <div class="informacoes-adicionais" style="padding-bottom: 120px;">
+     <p style="margin: 0; line-height: 20px; padding-right: 5px; font-size: 15px;font-family: Barlow; color: #212529;">{{cadastro.informacoesadicionais}}</p>
+  </div>
+  <!-- INFORMAÇÕES ADICIONAIS -->
+  
+
+
+  <p>&nbsp;</p>
+  <p>&nbsp;</p>
+
+</section>
+<!-- CONTENT -->
+
+
+</ion-content>
+
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label>Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label>Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa">
+      <ion-label>Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios" class="ativo" >
+      <img src="/assets/images/menu-passeios-ativo.svg" alt="Passeios"> 
+      <ion-label class="ativo">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label>Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->
+<section class="iniciar-marcacoes" id="configuracoesPasseio">   
+  <div class="fechar-marcacoes">
+   <a href="javascript:void(0)" title="Cancelar" onclick="fecharIniciarMarcacoes('#configuracoesPasseio')">
+      <img src="/assets/images/fechar.png" alt="cancelar">
+   </a>
+ </div>
+ <h2>Configurações<br>Passeios</h2>
+ <div class="row">
+   <div class="col-12">
+      <div class="caixa-branca">          
+          <nav>
+            <ul>
+              <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesPasseio')" title="Editar comunidade" (click)="editarPasseio()">Editar passeio</a></li>
+              <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesPasseio')" title="Mudar comunidade" (click)="mudarPrivacidade()">Tornar passeio {{cadastro.privacidade=='publico' ? 'privado' : 'publico'}}</a></li>
+              <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesPasseio')" title="Excluir comunidade" style="color:#DB541E !important;" (click)="excluirPasseio()">Excluir passeio</a></li>
+              <li *ngIf="cadastro.admin==0 && cadastro.participa==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesPasseio')" title="Sair comunidade" style="color:#DB541E !important;" (click)="sair()">Sair do passeio</a></li>
+              <li style="text-align: center;">
+                Código para convite
+                <br><a (click)="copiar()"><b>https://bike4all.com.br/c/?d={{cadastro.codigoconvite }} <br>
+                  <i class="fa fa-copy"></i></b></a>
+                  <br><a (click)="compartilhar()">Compartilhar</a>
+                
+                
+              </li>
+            </ul>
+          </nav>
+      </div>
+   </div>
+ </div>
+</section>
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->

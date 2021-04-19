@@ -1,0 +1,38 @@
+
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->
+<ion-content class="ion-text-center">
+<section class="iniciar-marcacoes" id="marcacoesAlertaRoubo" style="display: block; visibility: visible;">   
+  <div class="fechar-marcacoes">
+   <a href="javascript:void(0)" title="Cancelar"  (click)="close()">
+      <img src="/assets/images/fechar.png" alt="cancelar">
+   </a>
+ </div>
+ <h2>Alerta de roubo</h2>
+ <div class="row">
+   <div class="col-12">
+      <div class="caixa-branca">
+          <h3>Informe aos outros ciclitas o que houve:</h3>
+          <div class="form-group" style="display: none;">
+             <label>Confirmar senha</label>
+             <input type="password" class="form-control" id="alertaRouboConfirmarSenha" placeholder="Confirmar senha">
+          </div>
+          <div class="form-group">
+             <label>Informe a bike furtada</label>
+             <select class="form-control" id="alertaRouboListaBikes">
+                <option value="" selected>--Selecione--</option>
+                <option value="{{x.id}}" *ngFor="let x of bikes">{{x.nome}}</option>
+             </select>
+          </div>
+          <div class="form-group">
+             <label>Mensagens a outros usuários</label>
+             <textarea class="form-control" rows="5" id="alertaRouboComentarios" placeholder="Digite um comentário sobre o ocorrido"></textarea>
+         </div>
+          <div class="form-group">
+            <button type="button" class="btn btn-primary" id="alertaRouboBtn" (click)="salvarAlertaRoubo()">ALERTAR</button>
+          </div>
+      </div>
+   </div>
+ </div>
+</section>
+</ion-content>
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->

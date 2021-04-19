@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" viewBox="0 0 40 40">
+  <g id="Grupo_890" data-name="Grupo 890" transform="translate(-20 -429)">
+    <g id="Elipse_121" data-name="Elipse 121" transform="translate(20 429)" fill="#fff" stroke="#db541e" stroke-width="1.5">
+      <circle cx="20" cy="20" r="20" stroke="none"/>
+      <circle cx="20" cy="20" r="19.25" fill="none"/>
+    </g>
+    <g id="Grupo_594" data-name="Grupo 594" transform="translate(29.996 158.929)">
+      <path id="Caminho_507" data-name="Caminho 507" d="M2.412.529A1.893,1.893,0,0,0,.529,2.412V17.471a1.893,1.893,0,0,0,1.883,1.883H17.471a1.893,1.893,0,0,0,1.883-1.883V2.412A1.893,1.893,0,0,0,17.471.529Zm0,1.255H17.471a.614.614,0,0,1,.628.628V14.7L14.15,10.752a.628.628,0,0,0-.887,0l-.811.813L9.131,8.244a.626.626,0,0,0-.889,0L1.785,14.7V2.412A.613.613,0,0,1,2.412,1.784ZM8.687,9.573l2.889,2.889L6.222,18.1H2.412a.613.613,0,0,1-.627-.627v-1Zm5.021,2.511L18.1,16.478v.993a.613.613,0,0,1-.628.627H7.953Z" transform="translate(0 280.067)" fill="#db541e"/>
+      <path id="Caminho_508" data-name="Caminho 508" d="M12.036,283.242a2.509,2.509,0,1,0,2.508,2.508,2.519,2.519,0,0,0-2.508-2.508Zm0,1.255a1.254,1.254,0,1,1-1.255,1.253A1.242,1.242,0,0,1,12.036,284.5Z" transform="translate(1.672 0.492)" fill="#db541e"/>
+    </g>
+  </g>
+</svg>

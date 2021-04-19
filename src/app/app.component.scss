@@ -1,0 +1,18 @@
+modal-wrapper {
+    position: absolute;
+    width: 90%;
+    height: 90%;
+  }
+  
+ion-tab-button {
+  --padding-top: 0;
+--padding-end: 0px;
+--padding-bottom: 0;
+--padding-start: 0px;
+font-family:Barlow;
+font-size:11px;
+font-weight: normal;
+}
+ion-tab-button .ativo {
+  color:#DB541E !important;
+}

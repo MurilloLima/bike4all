@@ -1,0 +1,446 @@
+<ion-header *ngIf="!isTracking">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Mapa</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications" style="color:#fff;"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <!--  CONTENT -->
+  <section class="content">
+    <div #map id="mapa" class="map"></div>
+    <div id="autoPause">--PAUSADO AUTOMÁTICAMENTE--</div>
+    
+    <!--PESQUISA-->
+    <div class="conteudo-inner-full" >
+      <div class="container">
+        <div class="row">
+          <div class="col-12 pesquisa-local">
+
+              <div class="input-group" style="display:none;">
+                <div class="input-group-preppend">
+                  <button class="btn" type="button" onclick="">
+                    <img src="/assets/images/pesquisa.svg" alt="Para onde?">
+                  </button>
+                </div>
+                <input type="text" class="form-control"  [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="Para onde?" x-webkit-speech>                         
+                <div class="input-group-append" id="comendoPorVoz" style="display: none;">
+                  <button class="btn" type="button" onclick="">
+                    <img src="/assets/images/voz.svg" alt="Comando de voz">
+                  </button>
+                </div>
+              </div>
+              <ion-searchbar id="searchMapa" [(ngModel)]="search" (ionChange)="searchChanged()" placeholder="Para onde?" [hidden]="destination"></ion-searchbar>
+              <ion-list class="ion-margin-horizontal" [hidden]="!search.length">
+                <ion-item (click)="calcRoute(result)" *ngFor="let result of searchResults">
+                  {{result.description}}
+                </ion-item>
+              </ion-list>             
+
+          </div>
+        </div>
+      </div>
+    </div>
+    <!--PESQUISA-->
+
+
+
+    <!-- BTN GRAVAR -->
+    <div class="btn-gravar" id="btnGravar">
+      <a href="javascript:void(0)" title="Iniciar Gravação de percurso" (click)="iniciaGravacao()">
+          <img src="/assets/images/gravar.svg" alt="Inicar Gravação de percurso">
+      </a>
+    </div>
+    <!-- BTN GRAVAR -->
+
+
+
+  </section>
+  <!-- CONTENT -->
+
+
+</ion-content>
+
+
+<!-- SUGESTÃO ROTA -->
+<section class="sugestao-rota" id="sugestaoRota">
+  <div class="topHeader text-center" (click)="verMapa()">-</div>
+  <!-- TOP -->
+  <div class="top">
+    <a id="imgFavoritar" href="javascript:void(0)" title="Favoritar"  (click)="marcarFavorito();">
+       <img src="/assets/images/favoritar.svg" alt="Favoritar">
+    </a>
+    <a id="imgFavoritarAtivo" href="javascript:void(0)" style="display: none;">
+       <img src="/assets/images/favoritarAtivo.svg" alt="Favoritar">
+    </a>
+  </div>
+  <!-- TOP -->
+  <!-- CONTEUDO -->
+  <div class="conteudo-middle">
+    <h3>
+      <span id="nomeSugestao">{{destinoMapa.titulo}}</span>
+      <small id="enderecoSugestao">{{destinoMapa.endereco}}</small>
+    </h3>
+    <span id="timeEnderecoSugestao" style="display: none !important;"><b>{{destinoMapa.tempo.text}}</b></span>
+    <span id="distanciaEnderecoSugestao">{{destinoMapa.distancia.text}}</span> - 
+    <span id="maiorElevacaoEnderecoSugestao"><i class="fa fa-level-up"></i> {{destinoMapa.maiorElevacao}}</span> - 
+    <span id="menorElevacaoEnderecoSugestao"><i class="fa fa-level-down"></i> {{destinoMapa.menorElevacao}}</span>
+    <p>
+      <canvas id="graficoElevacao" style="width: 94%;height: auto"></canvas>
+    </p>
+    <div class="row">
+        <div class="col-8 offset-2">
+          <div class="row">
+              <div class="col-6" style="display: none;">
+                 <a href="javascript:void(0)" (click)="verRotas()" title="Rotas" class="btn btn-secondary">
+                   Rotas {{rotas.length}}
+                 </a>
+              </div>
+              <div class="col-12">
+                <a href="javascript:void(0)" (click)="verMapa()" title="Ver mapa" class="btn btn-secondary">
+                  Ver mapa
+                </a>
+              </div>
+          </div>
+        </div>
+     </div>
+  </div>
+  <!-- CONTEUDO -->
+  <!-- BOTTOM -->
+  <div class="bottom-sugestao">
+     <div class="row">
+        <div class="col-5">
+           <a href="javascript:void(0)" title="CANCELAR" class="btn btn-default" (click)="cancelarSugestao();">
+             CANCELAR
+           </a>
+        </div>
+        <div class="col-7">
+          <a href="javascript:void(0)" title="INICIAR" class="btn btn-primary btn-degrade" (click)="iniciaPercurso(0,0,0,0)">
+            <img src="/assets/images/bolt.svg" alt="INICAR"> INICIAR
+          </a>
+        </div>
+     </div>
+  </div>
+  <!-- BOTTOM -->
+
+</section>    
+<!-- SUGESTÃO ROTA -->
+
+
+<section class="gps" id="gpsFooter">
+  <div class="topHeader text-center" style="margin-bottom: -20px;" onclick="ativarDetalhesGps();">-</div>
+  <!-- LINHA UM -->
+  <div class="row linha-um">   
+      <!-- COLUNA 1 -->
+      <div class="col coluna-um">          
+        <a href="javascript:void(0)" title="Alerta de roubo"  (click)="showAlertaRoubo()">
+          <img src="/assets/images/roubo.svg" alt="Alerta de roubo" style="width: auto;">
+        </a>
+        <small style="display: block;color: #484848;text-decoration: none;">Informar furto</small>
+      </div>
+      <!-- COLUNA 1 -->
+
+      <!-- COLUNA 2 -->
+      <div class="col coluna-dois" onclick="ativarDetalhesGps();">
+          <h1><span id="gpsTempo">{{tempoTexto}}</span><small id="gpsDistanciaTempo">{{distanciaTotal.toFixed(2)}} km</small></h1>
+      </div>
+      <!-- COLUNA 2 -->
+
+      <!-- COLUNA 3 -->
+      <div class="col coluna-tres">
+         <a href="javascript:void(0)" title="Adicionar Marcação" (click)="incluirMarcacao();">
+            <img src="/assets/images/adicionar-marcacao.svg" alt="Adicionar Marcação">
+         </a>
+      </div>
+      <!-- COLUNA 3 -->
+
+  </div>
+  <!-- LINHA UM -->
+
+  <!-- LINHA DOIS -->
+  <div class="row linha-dois">
+     <div class="col">
+       <h2>
+         <small>TEMPO</small>
+         <span id="gpsTempoHoras">{{tempoTexto}}</span>
+       </h2>
+     </div>
+     <div class="col">
+       <h2>
+         <small>VELOC. MÉDIA</small>
+         <span id="gpsVelocidadeMedia">{{velocidadeMedia.toFixed(2)}}<u>km/h</u></span>
+       </h2>
+     </div>
+     <div class="col">
+       <h2>
+         <small>DISTÂNCIA</small>
+         <span id="gpsDistancia">{{distanciaTotal.toFixed(2)}}<u>km</u></span>
+       </h2>
+     </div>
+  </div>
+  <!-- LINHA DOIS -->
+
+  <!-- LINHA TRES -->
+  <div class="row linha-tres">
+    <div class="col-4">
+      <button class="btn btn-default" (click)="pausar()" id="btnPausar">PAUSAR</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-default" (click)="cancelarRota()" id="btnCancelar">CANCELAR</button>
+    </div>
+    <div class="col-4">
+      <button class="btn btn-primary" (click)="concluir()">CONCLUIR</button>
+    </div>
+  </div>
+  <!-- LINHA TRES -->
+
+
+</section>
+
+
+
+
+<!-- CAMINHOS E ALERTAS TOPO -->
+<section class="caminhos-alertas-topo" *ngIf="!isTracking">
+ <p>Aguardando instrução sobre o trajeto {{ orientacaoAngulo }}</p>
+ <div class="sinalizacao">
+    <img src="/assets/images/alerta.svg" alt=""> Cuidado, via perigosa
+ </div>
+
+</section>
+<!-- CAMINHOS E ALERTAS TOPO -->
+
+<!-- TOOLBAR FLUTUANTE -->
+<div class="toolbar-flutuante">
+  <ul>
+    <li style="display: none;">
+      <a href="javascript:void(0)" title="Busca">
+         <img src="/assets/images/busca.svg" alt="Busca">
+      </a>
+    </li>
+    <li style="display: none;">
+      <a href="javascript:void(0)" title="Desligar som">
+         <img src="/assets/images/volume.svg" alt="Desligar som">
+      </a>
+    </li>
+    <li style="display: none;">
+      <a href="javascript:void(0)" title="Alerta de roubo"  (click)="showAlertaRoubo()">
+         <img src="/assets/images/roubo.svg" alt="Alerta de roubo">
+      </a>
+    </li>
+  </ul>
+</div>
+<!-- TOOLBAR FLUTUANTE -->
+
+<!-- RECENTRALIZAR -->
+<div class="recentralizar">
+ <a href="javascript:void(0)" title="Recentralizar" (click)="recentralizar()">
+    <img src="/assets/images/recentralizar.svg" alt="Recentralizar">
+ </a>
+</div>
+<!-- RECENTRALIZAR -->
+
+<!-- VELOCIDADE -->
+<div class="velocidade">
+ <h2><span id="gpsVelocidadeAtual">{{velocidade}}</span><small>km/h</small></h2>
+</div>
+<!-- VELOCIDADE -->
+
+
+<!-- INICIAR MARCAÇÕES -->
+<section class="iniciar-marcacoes" id="marcacoesAlerta">
+  <div class="fechar-marcacoes">
+    <a href="javascript:void(0)" title="Cancelar" (click)="fecharIniciarMarcacoes()">
+       <img src="/assets/images/fechar.png" alt="cancelar">
+    </a>
+  </div>
+  <h2>Adicionar alerta</h2>
+  <div class="lista-marcacoes">
+    <div class="row">
+      <div class="col-4 marcacao" *ngFor="let item of alertasTipo">
+         <a href="javascript:void(0)" title="{{item.nome}}" (click)="gerarAlerta(item)">
+            <img src="/assets/images/{{item.icone}}" alt="">
+            <br>{{item.nome}}
+         </a>
+      </div>
+    </div>
+  </div>
+  <p>Os alertas são públicos</p>
+</section>
+<!-- INICIAR MARCAÇÕES -->
+
+
+
+<!-- COMPARTILHAR CONTEÚDO -->
+<section class="compartilhar-conteudo">
+  <!-- CABEÇALHO -->
+  <div class="cabecalho">
+      <div class="row">
+        <div class="col-6 coluna-um">
+           <a href="javascript:void(0)" title="Cancelar" (click)="cancelarCompartilhamento();">
+              <img src="/assets/images/cancelar-share.svg" alt="Cancelar"> 
+           </a>
+           Criar imagem
+        </div>
+        <div class="col-6 coluna-dois">
+           <a href="javascript:void(0)" title="Compartilhar" class="btn btn-primary" (click)="finalizarCompartilhamento()">
+             Compartilhar
+           </a>
+        </div>
+      </div>
+  </div>
+  <!-- CABEÇALHO -->
+  <!-- ÁREA CRIAÇÃO -->
+  <div id="html2canvas"></div>
+  <div class="area-criacao" id="areaCriacaoCompartilhamento" 
+    style="background:  #f2f2f2 no-repeat;background-size: cover;background-position: center center;
+    width:350px !important;height:350px !important;margin:0 auto;">       
+      <img src="" id="imgFoto">
+       <!-- LOGO -->
+       <div class="logo" style="position: absolute;display: block;right: 20px;top: 22px;">
+          <img src="/assets/images/logo-compartilhar.svg" alt="Logo BIke4All">
+       </div>
+       <!-- LOGO -->
+       <!-- DADOS -->
+       <div class="dados-trajeto" style="position: absolute;display: block;top: 313px;padding: 5px;left: 0;width: 100%;height: auto;color: #fff;background: rgba(0, 0, 0, 0.4);bottom: 0;">
+          <div class="row">
+             <!-- COLUNA -->
+             <div class="col" style="color:#ffffff;font-weight: 600;font-size: 18px;font-family: Barlow;">
+                <img src="/assets/images/share-pista.svg" alt=""> <span style="color:#ffffff">{{distanciaTotal | number : '1.1-1'}}</span> km
+             </div>
+             <!-- COLUNA -->
+             <!-- COLUNA -->
+             <div class="col" style="color:#ffffff;font-weight: 600;font-size: 18px;font-family: Barlow;">
+               <img src="/assets/images/share-cronometro.svg" alt=""> <span style="color:#ffffff">{{tempoTexto}}</span>
+             </div>
+             <!-- COLUNA -->
+             <!-- COLUNA -->
+             <div class="col" style="color:#ffffff;font-weight: 600;font-size: 18px;font-family: Barlow;">
+               <img src="/assets/images/share-velocimetro.svg" alt=""> <span style="color:#ffffff">{{velocidadeMedia | number : '1.1-1'}}</span> km/h
+             </div>
+             <!-- COLUNA -->
+          </div>
+       </div>
+       <!-- DADOS -->
+  </div>
+
+   
+  <!-- ÁREA CRIAÇÃO -->
+   <!-- TOOLBAR SHARE -->
+  <div class="toolbar-share">
+    <nav>
+      <ul>
+        <li><a href="javascript:void(0)" title="Mapa" ><img src="/assets/images/nav-map.svg" alt="Mapa"></a></li>
+        <li><a href="javascript:void(0)" title="Imagens" (click)="selectImage()"><img src="/assets/images/nav-library-desativado.svg" alt="Imagens"></a></li>
+        <li><a href="javascript:void(0)" title="Emoji" style="display: none;"><img src="/assets/images/nav-emojis-desativado.svg" alt="Emoji"></a></li>
+      </ul>
+    </nav>
+  </div>
+  <!-- TOOLBAR SAHRE -->
+  <!-- LISTAGEM DE IMAGENS -->
+  <div class="listagem-imagens" id="listagemImagens">
+      <div class="row">
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div id="imagem1" class="imagem" style="background: url('/assets/images/galeria1.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria1.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div class="imagem" style="background: url('/assets/images/galeria2.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria2.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div class="imagem" style="background: url('/assets/images/galeria3.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria3.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div class="imagem" style="background: url('/assets/images/galeria4.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria4.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div class="imagem" style="background: url('/assets/images/galeria5.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria5.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+         <!-- GALERIA -->
+         <div class="col-4">
+            <div class="imagem" style="background: url('/assets/images/galeria6.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center">
+              <a href="javascript:void(0)" title="Selecionar essa imagem" data-url="/assets/images/galeria6.png" onclick="selecionarImagemBackgroudnCompartilhar(this);">&nbsp;</a>
+            </div>
+         </div>
+         <!-- GALERIA -->
+      </div>
+  </div>
+  <!-- LISTAGEM DE IMAGENS -->
+</section>
+<!-- COMPARTILHAR CONTEÚDO -->
+
+
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label class="">Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label class="">Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa" class="ativo">
+      <img src="/assets/images/menu-mapa-ativo.svg" alt="Mapa"> 
+      <ion-label class="ativo">Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label class="">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades" >
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label>Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+<script>
+  function remover(){
+    alert("remover");
+  }
+  function editar(){
+    alert("editar");
+  }
+</script>

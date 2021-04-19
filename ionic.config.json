@@ -1,0 +1,7 @@
+{
+  "name": "bike4all",
+  "integrations": {
+    "cordova": {}
+  },
+  "type": "angular"
+}

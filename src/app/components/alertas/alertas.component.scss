@@ -1,0 +1,46 @@
+ion-content{
+    --ion-background-color:rgba(113, 113, 113, 0.9);
+}
+ion-button {
+    --background: #062f77;
+    text-transform: uppercase;
+}
+
+ion-content hr{
+    background-color:#e3e3e3;
+}
+ion-modal, ion-backdrop {
+    background: rgba(113, 113, 113, 0.9);
+    background-color: rgba(113, 113, 113, 0.9);
+    --ion-background-color: rgba(113, 113, 113, 0.9);
+    --ion-backdrop-color: rgba(113, 113, 113, 0.9);
+}
+
+
+
+section.iniciar-marcacoes h3{
+    font-family: Barlow;
+    font-size: 13px;
+    font-weight: normal;
+    margin-bottom: 18px;
+  }
+  
+  section.iniciar-marcacoes label{
+    font-family: Barlow;
+    margin-bottom: 0.5rem;
+    text-align: left !important;
+    display: block;
+    color: #6D6D6D;
+    font-size: 13px;
+  }
+  
+  section.iniciar-marcacoes .form-control{
+    font-family: Barlow;
+    background: #EEEEEE !important;
+    border-color: #EEEEEE !important;
+    outline: none !important;
+    box-shadow: none !important;
+    border-radius: 20.5px;
+    color: #000;
+    font-size: 15px;
+  }

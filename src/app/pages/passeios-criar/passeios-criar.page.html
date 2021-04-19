@@ -1,0 +1,364 @@
+<ion-header>
+   <ion-toolbar>
+     <ion-buttons slot="start" (click)="voltar()">
+       <ion-button>
+         <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+       </ion-button>
+     </ion-buttons>
+     <ion-title>Passeios</ion-title>
+ 
+   </ion-toolbar>
+ </ion-header>
+ 
+
+<ion-content>
+<!-- CONTENT -->
+<section class="content content-gray content-atividades content-passeios">      
+
+  <!-- UPLOAD FOTO DE DESTAQUE -->
+  <div class="upload-foto-destaque">
+   <div class="row">
+      <div class="col-12">
+          <div class="form-group" style="margin-bottom: 1px;">
+             <label>Foto de destaque</label>
+          </div>
+      </div>
+   </div>
+   <div class="row" (click)="selectImage()">
+      <div class="col-2">
+          <a href="javascript:void(0)" title="Adicionar foto de destaque ao passeio">
+             <img src="/assets/images/add-photo-passeio.png" alt="Adicionar foto de destaque ao passeio">
+         </a>
+      </div>
+      <div class="col-10">
+         Adicionar foto de destaque
+      </div>
+   </div>
+  
+   <div class="row" *ngIf="fotoUrl">
+     <div class="col-12">
+        <img [src]="fotoUrl" style="max-height: 200px;"  (click)="selectImage()"/>
+     </div>
+   </div>
+ </div>
+  <!-- UPLOAD FOTO DE DESTAQUE --> 
+
+ <!-- NOME DO PASSEIO-->
+  <div class="busca-passeios-andamento ajuste-padding">
+      <div class="row">
+         <div class="col-12">
+            <div class="form-group">
+               <label>Nome</label>
+               <input type="text" class="form-control" [(ngModel)]="cadastro.titulo" placeholder="Dê um nome ao seu passeio">
+            </div>
+         </div>              
+      </div>
+  </div>
+  
+  <div class="busca-passeios-andamento ajuste-padding">
+   <div class="row">
+      <div class="col-12">
+            <div class="form-group">
+               <label>Descrição</label>
+               <textarea class="form-control" [(ngModel)]="cadastro.descricao" rows="5" placeholder="Informe a descrição do evento."></textarea>
+            </div>
+      </div>           
+   </div>
+</div>
+  <!-- NOME DO PASSEIO -->   
+
+
+ <!-- APPEND ENDEREÇOS -->
+ <div class="append-enderecos">  
+    <div class="form-group">
+       <label>Trajeto</label>
+    </div>
+    <!-- INCLUIR ROTAS -->
+    <div class="incluir-rotas-criar-passeio">   
+      <div class="row" *ngFor="let x of destinos; let i = index">
+         <div class="col-2">
+            <img src="/assets/images/incluir-trajeto-final.svg" alt="Incluir o destino">
+         </div>
+         <div class="col-8">
+            <input type="text" class="form-control" [(ngModel)]="x.endereco" placeholder="Informe o destino">
+         </div>
+         <div class="col-2">
+            <img src="/assets/images/cancelar-share.svg" style="width: 17px !important;height: 17px !important;max-width: 17px;" alt="excluir o destino" (click)="removerDestino(x)">
+         </div>
+      </div>  
+       <div class="row">
+          <div class="col-2">
+             <img src="/assets/images/incluir-trajeto.svg" alt="Incluir Trajeto">
+          </div>
+          <div class="col-10">
+             <ion-searchbar id="searchMapa" [(ngModel)]="search" (ionChange)="searchChanged(search)" placeholder="Informe o ponto do trajeto"></ion-searchbar>
+              <ion-list class="ion-margin-horizontal" [hidden]="!search.length">
+               <ion-item (click)="incluirDestino(result)" *ngFor="let result of searchResults">
+                 {{result.description}}
+               </ion-item>
+             </ion-list>      
+          </div>
+       </div>
+       
+       <!-- LINHA PROJETO -->
+       <!-- MAPA -->
+       <div class="map" id="mapaGoogle"></div>
+       <!-- MAPA -->
+   </div>
+   <!-- INCLUIR ROTAS -->
+ </div>
+ <!-- APPEND ENDEREÇOS -->
+
+ <!-- UPLOAD FOTO DE DESTAQUE -->
+  <div class="upload-foto-destaque">
+    <div class="row">
+       <div class="col-12">
+           <div class="form-group text-center" style="margin-bottom: 1px;">
+              <label style="margin-bottom: 0px;">OU</label>
+           </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-2">
+           <a href="javascript:void(0)" title="Utilizar rota salva">
+              <img src="/assets/images/rota-salva.png" alt="Rota salva">
+           </a>
+       </div>
+       <div class="col-10" (click)="usarRotaSalva()">
+          Utilizar uma rota salva
+          <small>Utilize uma rota já realizada por voce.</small>
+       </div>
+    </div>
+  </div>
+  <!-- UPLOAD FOTO DE DESTAQUE --> 
+  
+
+ <!-- DATA DO PASSEIO-->
+  <div class="busca-passeios-andamento ajuste-padding" style="padding-bottom: 28px;">
+      <div class="row">
+         <div class="col-12">
+               <div class="form-group" style="margin-bottom: 1px;">
+                  <label>Data do passeio</label>                                  
+               </div>
+         </div>                           
+      </div>
+      <div class="row data-novo-passeio">
+         <div class="col">
+            <select class="form-control" [(ngModel)]="cadastro.dia">
+               <option value="">Dia</option>
+               <option value="01">01</option>
+               <option value="02">02</option>
+               <option value="03">03</option>
+               <option value="04">04</option>
+               <option value="05">05</option>
+               <option value="06">06</option>
+               <option value="07">07</option>
+               <option value="08">08</option>
+               <option value="09">09</option>
+               <option value="10">10</option>
+               <option value="11">11</option>
+               <option value="12">12</option>
+               <option value="13">13</option>
+               <option value="14">14</option>
+               <option value="15">15</option>
+               <option value="16">16</option>
+               <option value="17">17</option>
+               <option value="18">18</option>
+               <option value="19">19</option>
+               <option value="20">20</option>
+               <option value="21">21</option>
+               <option value="22">22</option>
+               <option value="23">23</option>
+               <option value="24">24</option>
+               <option value="25">25</option>
+               <option value="26">26</option>
+               <option value="27">27</option>
+               <option value="28">28</option>
+               <option value="29">29</option>
+               <option value="30">30</option>
+               <option value="31">31</option>
+            </select>
+         </div>
+         <div class="col">
+            <select class="form-control" [(ngModel)]="cadastro.mes">
+               <option value="">Mês</option>
+               <option value="01">Janeiro</option>
+               <option value="02">Fevereiro</option>
+               <option value="03">Março</option>
+               <option value="04">Abril</option>
+               <option value="05">Maio</option>
+               <option value="06">Junho</option>
+               <option value="07">Julho</option>
+               <option value="08">Agosto</option>
+               <option value="09">Setembro</option>
+               <option value="10">Outubro</option>
+               <option value="11">Novembro</option>
+               <option value="12">Dezembro</option>
+            </select>
+         </div>
+         <div class="col">
+            <select class="form-control" [(ngModel)]="cadastro.ano">
+               <option value="">Ano</option>
+               <option value="2020">2020</option>
+               <option value="2021">2021</option>
+               <option value="2022">2022</option>
+               <option value="2023">2023</option>
+               <option value="2024">2024</option>
+               <option value="2025">2025</option>
+            </select>
+         </div>
+      </div>
+      <div class="row">
+         <div class="col-6">
+               <div class="form-group" style="margin-bottom: 1px;">
+                  <label>Hora de inicio</label>
+                  <input type="time" class="form-control" [(ngModel)]="cadastro.horario" placeholder="HH:mm">                                  
+               </div>
+         </div>                           
+      </div>
+  </div>
+  <!-- DATA DO PASSEIO --> 
+
+  <!-- PÚBLICO OU PRIVADO -->
+  <div class="upload-foto-destaque privacidade-passeio">  
+    <div class="row">
+       <div class="col-2">
+           <a href="javascript:void(0)" title="Privacidade do passeio">
+              <img src="/assets/images/publico.svg" alt="Privacidade do passeio">
+           </a>
+       </div>
+       <div class="col-8">
+          Público
+          <small>Qualquer ciclista pode participar do passeio.</small>
+       </div>
+       <div class="col-2 actions-privacidade">                        
+            <div class="form-check">
+              <input class="form-check-input" type="radio"  [(ngModel)]="cadastro.privacidade" name="privacidade" value="publico" id="privacidadePublico">
+              <label class="form-check-label" for="privacidadePublico">
+              </label>
+            </div>
+       </div>
+    </div>
+    <div class="row">
+       <div class="col-2">
+           <a href="javascript:void(0)" title="Privacidade do passeio">
+              <img src="/assets/images/privado.svg" alt="Privacidade do passeio">
+           </a>
+       </div>
+       <div class="col-8">
+          Privado
+          <small>Somente os ciclistas convidados poderão participar do passeio.</small>
+       </div>
+       <div class="col-2 actions-privacidade">                        
+            <div class="form-check">
+              <input class="form-check-input" type="radio"  [(ngModel)]="cadastro.privacidade" name="privacidade" value="privado" id="privacidadePrivado">
+              <label class="form-check-label" for="privacidadePrivado">
+              </label>
+            </div>
+       </div>
+    </div>
+
+  </div>
+  <!-- PÚBLICO OU PRIVADO -->
+  
+  
+
+  <!-- NÍVEL DE DIFICULDADE -->
+  <div class="busca-passeios-andamento nivel-dificuldade ajuste-padding">
+      <div class="row">
+         <div class="col-12">
+               <div class="form-group">
+                  <label>Nível de dificuldade do trajeto</label>
+               </div>
+         </div>                           
+      </div>
+      <div class="row">
+         <div class="col">
+            <button type="button" (click)="cadastro.niveldificuldade='facil'" [class]="cadastro.niveldificuldade=='facil' ? 'btn btn-primary  btn-primary-nivel-facil' : 'btn btn-primary btn-primary-desativado'">
+               Fácil
+            </button>
+         </div>
+         <div class="col">
+            <button type="button" (click)="cadastro.niveldificuldade='moderada'" [class]="cadastro.niveldificuldade=='moderada' ? 'btn btn-primary  btn-primary-nivel-moderada' : 'btn btn-primary btn-primary-desativado'">
+               Moderada
+            </button>
+         </div>
+         <div class="col">
+            <button type="button" (click)="cadastro.niveldificuldade='dificil'" [class]="cadastro.niveldificuldade=='dificil' ? 'btn btn-primary  btn-primary-nivel-dificil' : 'btn btn-primary btn-primary-desativado'">
+               Díficil
+            </button>
+         </div>
+      </div>
+  </div>
+  <div class="busca-passeios-andamento nivel-dificuldade ajuste-padding">
+      <div class="row">
+         <div class="col-12">
+               <div class="form-group">
+                  <label>Tipo de terreno</label>
+               </div>
+         </div>                           
+      </div>
+      <div class="row">
+         <div class="col">
+            <button type="button" (click)="cadastro.tipoterreno='cidade'"   [class]="cadastro.tipoterreno=='cidade' ? 'btn btn-default' : 'btn btn-default btn-default-desativado'">
+               <img src="/assets/images/cidade{{cadastro.tipoterreno=='cidade' ? '-ativo' : ''}}.svg" alt="Tipo de terreno"> Cidade
+            </button>
+         </div>
+         <div class="col">
+            <button type="button" (click)="cadastro.tipoterreno='campo'"  [class]="cadastro.tipoterreno=='campo' ? 'btn btn-default' : 'btn btn-default btn-default-desativado'">
+               <img src="/assets/images/campo{{cadastro.tipoterreno=='campo' ? '-ativo' : ''}}.svg" alt="Tipo de terreno"> Campo
+            </button>
+         </div>
+         <div class="col">
+            <button type="button" (click)="cadastro.tipoterreno='trilha'"  [class]="cadastro.tipoterreno=='trilha' ? 'btn btn-default' : 'btn btn-default btn-default-desativado'">
+               <img src="/assets/images/trilha{{cadastro.tipoterreno=='trilha' ? '-ativo' : ''}}.svg" alt="Tipo de terreno"> Trilha
+            </button>
+         </div>
+      </div>         
+  </div>
+  <!-- NÍVEL DE DIFICULDADE -->
+
+
+  <!-- NOME DO PASSEIO-->
+  <div class="busca-passeios-andamento ajuste-padding" style="padding-bottom: 120px;">
+      <div class="row">
+         <div class="col-12">
+               <div class="form-group">
+                  <label>Detalhes adicionais</label>
+                  <textarea class="form-control" [(ngModel)]="cadastro.informacoesadicionais" rows="5" placeholder="Informe detalhes importante sobre o evento."></textarea>
+               </div>
+         </div>           
+      </div>
+  </div>
+  <!-- NOME DO PASSEIO -->   
+
+ 
+
+
+
+ <!-- CONVIDAR MEMBROS -->
+  <div class="upload-foto-destaque privacidade-passeio" style="display: none;"> 
+    <div class="row">
+       <div class="col-2">
+           <a href="javascript:void(0)" title="Convidar membros">
+              <img src="/assets/images/convidar-membros.svg" alt="Convidar membros" style="margin-top: 8px;">
+           </a>
+       </div>
+       <div class="col-10">
+          Convidar membros
+          <small>Convide os alguns ciclistas para participar.</small>
+       </div>      
+    </div>
+  </div>
+  <!-- CONVIDAR MEMBROS -->
+
+<!-- AREA BTN CRIAR PASSEIO -->
+<div class="area-btn-criar-passeio" style="bottom: 0px;">
+<a href="javascript:void(0)" title="CRIAR PASSEIO" class="btn btn-primary" (click)="salvarDados()">{{ (cadastro.id !=undefined && cadastro.id!="0" && cadastro.id!="" ? "SALVAR ALTERAÇÕES" : "CRIAR PASSEIO") }}</a>
+</div>
+<!-- AREA BTN CRIAR PASSEIO -->
+</section>
+<!-- CONTENT -->
+
+</ion-content>
+

@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Configurações</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">*</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+Conteudo de Configurações
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label>Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label>Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa">
+      <ion-label>Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label>Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label>Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

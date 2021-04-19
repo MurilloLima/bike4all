@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64.558" height="79.194" viewBox="0 0 64.558 79.194">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.648" y1="0.921" x2="0.332" y2="0.071" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#53db8a"/>
+      <stop offset="1" stop-color="#33986c"/>
+    </linearGradient>
+    <filter id="Caminho_114" x="0" y="0" width="64.558" height="79.194" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_639" x="13.142" y="9.849" width="37.067" height="44.012" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_886" data-name="Grupo 886" transform="translate(-9010 -1591.585)">
+    <g transform="matrix(1, 0, 0, 1, 9010, 1591.58)" filter="url(#Caminho_114)">
+      <path id="Caminho_114-2" data-name="Caminho 114" d="M8.469,8.732A29.933,29.933,0,0,1,50.8,51.064L29.635,72.23,8.469,51.064A30.75,30.75,0,0,1,8.469,8.732Z" transform="translate(2.48 1.05)" stroke="#fff" stroke-width="2" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    </g>
+    <g transform="matrix(1, 0, 0, 1, 9010, 1591.58)" filter="url(#Caminho_639)">
+      <path id="Caminho_639-2" data-name="Caminho 639" d="M37.867,52.266h3.055l-.29-9.151,4.243-6.308a8.008,8.008,0,1,0,5.256-14.751v-.022a10.78,10.78,0,0,0-21.55-.474,7.35,7.35,0,1,0,5.49,13.481l4.037,5.3-.242,11.928ZM43.975,36.16l-3.343,3.7-.239-7.1a10.758,10.758,0,0,0,1.118-.167,8.013,8.013,0,0,0,2.464,3.563Zm-7.3-3.682a10.7,10.7,0,0,0,1.611.284L38.109,37.6l-3.041-3.253A7.382,7.382,0,0,0,36.674,32.478Z" transform="translate(-8.39 -0.9)" fill="#fff" fill-rule="evenodd"/>
+    </g>
+  </g>
+</svg>

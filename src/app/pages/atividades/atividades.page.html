@@ -1,0 +1,290 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Atividades</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+<!-- CONTENT -->
+
+<section class="content content-gray content-atividades">
+  <!-- BOTÕES DAS ABAS -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item" style="width:23% !important;">
+          <a class="nav-link active" id="passeios-tab" data-toggle="tab" target="_self" href="#atividade_passeios" role="tab" aria-controls="passeios" aria-selected="true">Passeios</a>
+        </li>
+        <li class="nav-item" style="width:31% !important;">
+          <a class="nav-link" id="rotasSemanais-tab" data-toggle="tab" target="_self" href="#atividade_rotasSemanais" role="tab" aria-controls="rotasSemanais" aria-selected="false">Rotas semanais</a>
+        </li>
+        <li class="nav-item" style="width:23% !important;">
+          <a class="nav-link" id="destinosSalvos-tab" data-toggle="tab" target="_self" href="#atividade_destinosSalvos" role="tab" aria-controls="destinosSalvos" aria-selected="false">Destinos</a>
+        </li>   
+        <li class="nav-item" style="width:23% !important;">
+          <a class="nav-link" id="gravacoesSalvos-tab" data-toggle="tab" target="_self" href="#atividade_gravacoesSalvos" role="tab" aria-controls="gravacoesSalvos" aria-selected="false">Gravações</a>
+        </li>       
+  </ul>
+  <!-- BOTÕES DAS ABAS -->
+
+  <!-- CONTEÚDO DAS ABAS -->
+  <div class="tab-content" id="tabsAtividades">
+        <!-- PASSEIOS -->
+        <div class="tab-pane fade show active" id="atividade_passeios" role="tabpanel" aria-labelledby="passeios-tab">
+          <h3 class="subtitulo" *ngIf="passeios_proximos.length <= 0 && passeios_realizados.length <= 0">Você não tem nenhum passeio</h3>
+            <h3 class="subtitulo" *ngIf="passeios_proximos.length >0">Próximo(s) passeio(s)</h3>
+            <!-- LOOP ATIVIDADES -->
+            <div class="loop-atividades" *ngIf="passeios_proximos.length >0">
+               <!-- ATIVIDADE COMPLEXA -->
+               <div class="atividade atividade-complexa" *ngFor="let x of passeios_proximos">
+                   <div class="capa-atividade" 
+                          [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                          style="background-color:  #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                       <span>{{x.distancia}} km</span>
+                       <a href="javascript:void(0)" (click)="openPasseioProximo(x)" title="DETALHES">DETALHES</a>
+                   </div>
+                   <h2>
+                    {{x.titulo}}
+                     <small>
+                       <span class="dataAtividade">{{x.data}}</span> • 
+                       <span class="temperaturaAtividade">{{x.previsaotempo}}</span> - 
+                       <span class="climaAtividade">{{x.previsaoceu}}</span>
+                     </small>
+                   </h2>
+               </div>
+               <!-- ATIVIDADE COMPLEXA -->
+
+            </div>
+            <!-- LOOP ATIVIDADES -->
+            <h3 class="subtitulo" style="margin-bottom: 22px;" *ngIf="passeios_realizados.length >0">Passeios realizados</h3>
+
+            <!-- LOOP ATIVIDADES -->
+            <div class="loop-atividades"  style="padding-bottom: 165px;" *ngIf="passeios_realizados.length >0">
+        
+               <!-- ATIVIDADE SIMPLES -->
+               <div class="atividade atividade-simples" (click)="openPasseioRealizado(x)" 
+                      *ngFor="let x of passeios_realizados">
+                   <div class="row">
+                      <!-- FOTO CAPA ATIVIDADE -->
+                      <div class="col-3">
+                         <div class="capa-atividade" 
+                              [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                              style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                             <a href="javascript:void(0)" title="DETALHES">
+                                &nbsp;
+                             </a>
+                         </div>
+                      </div>
+                      <!-- FOTO CAPA ATIVIDADE -->
+                      <!-- CONTEUDO ATIVIDADE -->
+                      <div class="col-9">
+                        <h2>
+                         {{x.titulo}}
+                          <small>
+                            <span class="dataAtividade">{{x.data}}</span> • 
+                            <span class="temperaturaAtividade">{{x.previsaotempo}}</span> - 
+                            <span class="climaAtividade">{{x.previsaoceu}}</span>
+                          </small>
+                        </h2>
+                      </div>
+                      <!-- CONTEUDO ATIVIDADE -->
+                   </div>
+               </div>
+               <!-- ATIVIDADE SIMPLES -->
+
+
+            </div>
+            <!-- LOOP ATIVIDADES -->
+        </div>
+        <!-- PASSEIOS -->
+
+        <!-- ROTAS SEMANAIS -->
+        <div class="tab-pane fade" id="atividade_rotasSemanais" role="tabpanel" aria-labelledby="rotasSemanais-tab">
+          
+            <h3 class="subtitulo" *ngIf="rotas_semanais.length <=0">Você não está participando de nenhuma rota semanal</h3>
+            <h3 class="subtitulo" *ngIf="rotas_semanais.length > 0">Rotas semanais</h3>
+            <!-- LOOP ATIVIDADES -->
+            <div class="loop-atividades" *ngIf="rotas_semanais.length > 0">
+               <!-- ATIVIDADE SIMPLES -->
+               <div class="atividade atividade-simples" (click)="openRotaSemanal(x)"
+                   *ngFor="let x of rotas_semanais" 
+                   style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+                <div class="row">
+                   <!-- FOTO CAPA ATIVIDADE -->
+                   <div class="col-3">
+                      <div class="capa-atividade" 
+                           [style.backgroundImage]="'url(' + x.urlimagem +')'" 
+                           style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                          <a href="javascript:void(0)" title="DETALHES">
+                          </a>
+                      </div>
+                   </div>
+                   <!-- FOTO CAPA ATIVIDADE -->
+                   <!-- CONTEUDO ATIVIDADE -->
+                   <div class="col-9">
+                     <h2>
+                      {{x.titulo}}
+                      <small>
+                       <span class="dataAtividade">{{ x.datadescricao }}</span> • 
+                       <span class="temperaturaAtividade">saída às {{x.horario}}</span>
+                       <span class="trajetoAtividade">{{ x.distancia }} Km</span>
+                      </small>
+                     </h2>
+                   </div>
+                   <!-- CONTEUDO ATIVIDADE -->
+                </div>
+              </div>
+              <!-- ATIVIDADE SIMPLES -->
+
+            </div>
+            <!-- LOOP ATIVIDADES --> 
+        </div>
+        <!-- ROTAS SEMANAIS -->
+
+        <!-- DESTINOS SALVOS -->
+        <div class="tab-pane fade" id="atividade_destinosSalvos" role="tabpanel" aria-labelledby="destinosSalvos-tab"> 
+             <h3 class="subtitulo" *ngIf="destinos_salvos.length <= 0">Você não tem nenhum destino salvo</h3>
+             <h3 class="subtitulo" *ngIf="destinos_salvos.length > 0">Destinos salvos</h3>
+            <!-- LOOP ATIVIDADES -->
+            <div class="loop-atividades" *ngIf="destinos_salvos.length > 0" >
+            
+              <!-- ATIVIDADE SIMPLES -->
+              <div class="atividade atividade-simples" (click)="openDestinoSalvo(x)"
+                  *ngFor="let x of destinos_salvos" 
+                  style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+              <div class="row">
+                  <!-- FOTO CAPA ATIVIDADE -->
+                  <div class="col-3">
+                    <div class="capa-atividade" 
+                          [style.backgroundImage]="'url(' + x.urlimagem +')'" 
+                          style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                        <a href="javascript:void(0)" title="DETALHES">
+                            &nbsp;
+                        </a>
+                    </div>
+                  </div>
+                  <!-- FOTO CAPA ATIVIDADE -->
+                  <!-- CONTEUDO ATIVIDADE -->
+                  <div class="col-9">
+                    <h2>
+                      {{x.endereco}}
+                      <small>
+                        <span class="dataAtividade">{{x.data}}</span> 
+                        <span class="trajetoAtividade">{{x.distancia}}</span>
+                      </small>
+                    </h2>
+                  </div>
+                  <!-- CONTEUDO ATIVIDADE -->
+              </div>
+              </div>
+              <!-- ATIVIDADE SIMPLES -->
+
+            </div>
+           <!-- LOOP ATIVIDADES -->
+           
+        </div>
+        <!-- DESTINOS SALVOS -->
+
+        <!-- GRAVAÇÕES -->
+        <div class="tab-pane fade" id="atividade_gravacoesSalvos" role="tabpanel" aria-labelledby="gravacoesSalvos-tab"> 
+          <h3 class="subtitulo" *ngIf="gravacoes.length <= 0">Você não tem nenhuma gravações</h3>
+          <h3 class="subtitulo" *ngIf="gravacoes.length > 0">Gravações</h3>
+          <!-- LOOP ATIVIDADES -->
+          <div class="loop-atividades" *ngIf="gravacoes.length > 0" >
+          
+            <!-- ATIVIDADE SIMPLES -->
+            <div class="atividade atividade-simples"  (click)="openDestinoSalvo(x)"
+                *ngFor="let x of gravacoes" 
+                style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+              <div class="row">
+                  <!-- FOTO CAPA ATIVIDADE -->
+                  <div class="col-3">
+                    <div class="capa-atividade" 
+                          [style.backgroundImage]="'url(' + x.urlimagem +')'" 
+                          style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                        <a href="javascript:void(0)" title="DETALHES">
+                            &nbsp;
+                        </a>
+                    </div>
+                  </div>
+                  <!-- FOTO CAPA ATIVIDADE -->
+                  <!-- CONTEUDO ATIVIDADE -->
+                  <div class="col-9">
+                    <h2>
+                      {{x.endereco}}
+                      <small>
+                        <span class="dataAtividade">{{x.data}}</span> 
+                        <span class="trajetoAtividade">{{x.distancia}}</span>
+                      </small>
+                    </h2>
+                  </div>
+                  <!-- CONTEUDO ATIVIDADE -->
+              </div>
+            </div>
+            <!-- ATIVIDADE SIMPLES -->
+
+          </div>
+          <!-- LOOP ATIVIDADES -->
+        
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+          <p>&nbsp;</p>
+        </div>
+        <!-- GRAVAÇÕES -->
+
+
+    </div>
+    <!-- CONTEÚDO DAS ABAS -->
+
+
+</section>
+<!-- CONTENT -->
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades-ativo.svg" alt="Atividades">
+      <ion-label class="ativo">Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label class="">Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa"> 
+      <ion-label class="">Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label class="">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label class="">Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

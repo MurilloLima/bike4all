@@ -1,0 +1,200 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-button>
+        <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Rota Semanal</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<!-- HEADER -->
+
+<ion-content>
+
+  
+<!-- CONTENT -->
+<section class="content content-gray content-performance" style="overflow: auto;">   
+
+
+ <!-- CONTEÚDO DAS ABAS -->
+  <div class="tab-content" id="tabsPerformance" [hidden]="isdetalhes">
+
+        <!-- GERAL -->
+        <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">    
+             <h3 class="subtitulo" style="color: #DB541E;padding-left: 10px;margin-top: 0px;">{{grafico.data}}</h3>     
+             <h3 class="titulo" style="margin-bottom: 22px;padding-left: 10px;padding-right: 10px;margin-top: -9px;">{{grafico.nome}}</h3>           
+             <!-- GRAFICOS E ESTATISTICAS -->
+             <div class="graficos" style="overflow: hidden;">
+              <!-- LINHA DOIS -->
+              <div class="row linha-dois">
+                <div class="col">
+                  <h2 (click)="loadGrafico('tempo')" [class]="(tipoGrafico=='tempo') ? 'active':''">
+                    <small>TEMPO</small>
+                    <span>{{convertTempo(graficoDados.tempo,'horas')}}</span>
+                  </h2>
+                </div>
+                <div class="col">
+                  <h2 (click)="loadGrafico('velocidade')" [class]="(tipoGrafico=='velocidade') ? 'active':''">
+                    <small>VELOC. MÉDIA</small>
+                    <span>{{graficoDados.velocidademedia}}<u>km/h</u></span>
+                  </h2>
+                </div>
+                <div class="col">
+                  <h2 (click)="loadGrafico('distancia')" [class]="(tipoGrafico=='distancia') ? 'active':''">
+                    <small>DISTÂNCIA</small>
+                    <span>{{graficoDados.distancia}}<u>KM</u> </span>
+                  </h2>
+                </div>
+                <div class="col">
+                  <h2 (click)="loadGrafico('calorias')" [class]="(tipoGrafico=='calorias') ? 'active':''">
+                    <small>CALORIAS</small>
+                    <span>{{graficoDados.calorias}} </span>
+                  </h2>
+                </div>
+              </div>
+              <!-- LINHA DOIS -->
+              <div class="grafico">
+                <canvas id="graficoPerformanceDestino"></canvas>
+              </div>
+              <div class="actions-grafico">
+                <div class="row">
+
+                    <div class="col-12" style="text-align: center;">
+                        <h3>
+                          <input type="date"  [(ngModel)]="datainicioGrafico" (change)="loadPerformanceGrafico('rota', idGeral)"  /> - <input type="date" [(ngModel)]="datafimGrafico"  (change)="loadPerformanceGrafico('rota', idGeral)" />
+                        </h3>
+                    </div>
+
+                </div>
+              </div>
+
+          </div>
+          <!-- GRAFICOS E ESTATISTICAS -->
+
+          <!-- CONQUISTAS-->
+          
+
+          <div class="graficos" style="display: none;">
+                 <h3 class="subtitulo">Conquistas</h3>
+                 <div class="loop-conquistas">
+                    <div class="row">
+                        <div class="col-3">
+                           <a href="javascript:void(0)" title="Nome da conquista">
+                              <img src="/assets/images/conquista-1.png" alt="Nome da conquista">
+                           </a>
+                        </div>
+                        <div class="col-3">
+                           <a href="javascript:void(0)" title="Nome da conquista">
+                              <img src="/assets/images/conquista-2.png" alt="Nome da conquista">
+                           </a>
+                        </div>
+                        <div class="col-3">
+                           <a href="javascript:void(0)" title="Nome da conquista">
+                              <img src="/assets/images/conquista-3.png" alt="Nome da conquista">
+                           </a>
+                        </div>
+                        <div class="col-3">
+                           <a href="javascript:void(0)" title="Nome da conquista">
+                              <img src="/assets/images/conquista-4.png" alt="Nome da conquista">
+                           </a>
+                        </div>
+                    </div>
+                 </div>
+          </div>
+          <!-- CONQUISTAS -->
+           
+          <!-- RESUMO-->
+          <div class="graficos">
+              <table class="table">
+                    <thead>
+                      <th colspan="2">
+                        Resumo
+                      </th>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Distância</td>
+                        <td>{{dados.distancia }} km</td>
+                      </tr>
+                      <tr>
+                        <td>Tempo</td>
+                        <td>{{dados.tempo}}</td>
+                      </tr>
+                      <tr>
+                        <td>Pedaladas</td>
+                        <td>{{dados.pedaladas}}</td>
+                      </tr>
+                      <tr>
+                        <td>Calorias</td>
+                        <td>{{dados.calorias}} cal</td>
+                      </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Ganho de elevação</td>
+                        <td>{{dados.ganhoelevacao}}</td>
+                      </tr>
+                      <tr>
+                        <td>Maior elevação</td>
+                        <td>{{dados.maiorelevacao}}</td>
+                      </tr>
+                      <tr>
+                        <td>Menor elevação</td>
+                        <td>{{dados.menorelevacao}}</td>
+                      </tr>
+                    </tbody>
+                </table>
+
+                <table class="table">
+                    <tbody>
+                      <tr>
+                        <td>Melhor tempo</td>
+                        <td>{{dados.melhortempo}}</td>
+                      </tr>
+                      <tr>
+                        <td>Maior distância</td>
+                        <td>{{dados.maiordistancia}} km</td>
+                      </tr>
+                      <tr>
+                        <td>Velocidade média</td>
+                        <td>{{dados.velocidademedia}} km/h</td>
+                      </tr>
+                    </tbody>
+                </table>
+
+                <p>&nbsp;</p>
+
+                <div class="actions-grafico">
+                  <div class="row">
+                      <div class="col-12" style="text-align: center;">
+                          <h3><input type="date"  [(ngModel)]="datainicio" (change)="loadPerformance('rota', idGeral)"  /> - <input type="date" [(ngModel)]="datafim"  (change)="loadPerformance('rota', idGeral)" />
+                          </h3>
+                      </div>
+
+                  </div>
+                </div>
+                
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+                <p>&nbsp;</p>
+          </div>
+          <!-- RESUMO -->
+        </div>
+       <!-- GERAL -->
+
+
+  </div>
+  <!-- CONTEÚDO DAS ABAS -->
+  
+<!-- CONTEÚDO DAS ABAS -->
+</section>
+<!-- CONTENT -->
+ 
+</ion-content>

@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="41.528" height="48.05" viewBox="0 0 41.528 48.05">
+  <defs>
+    <filter id="Caminho_648" x="0" y="0" width="41.528" height="48.05" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1.5" result="blur"/>
+      <feFlood flood-opacity="0.451"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_891" data-name="Grupo 891" transform="translate(-8745 -1626.208)">
+    <g transform="matrix(1, 0, 0, 1, 8745, 1626.21)" filter="url(#Caminho_648)">
+      <path id="Caminho_648-2" data-name="Caminho 648" stroke="#fff" d="M4.353,4.451a15.344,15.344,0,0,1,21.7,21.7L15.2,37,4.353,26.15A15.762,15.762,0,0,1,4.353,4.451Z" fill="#db541e" transform="translate(5.47 5.55)" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" fill-rule="evenodd"/>
+    </g>
+    <path id="Caminho_649" data-name="Caminho 649" d="M9.52-7.3q-.12.06,0,.12a3.386,3.386,0,0,1,1.9,3.26A3.432,3.432,0,0,1,10.1-.99,5.621,5.621,0,0,1,6.64,0H1.46a.231.231,0,0,1-.17-.07.231.231,0,0,1-.07-.17V-13.76a.231.231,0,0,1,.07-.17A.231.231,0,0,1,1.46-14H6.48q4.74,0,4.74,3.84A2.963,2.963,0,0,1,9.52-7.3ZM4.14-11.58a.088.088,0,0,0-.1.1v3.12a.088.088,0,0,0,.1.1H6.48A2.195,2.195,0,0,0,7.94-8.7a1.489,1.489,0,0,0,.52-1.2,1.542,1.542,0,0,0-.52-1.23,2.162,2.162,0,0,0-1.46-.45Zm2.5,9.14a2.07,2.07,0,0,0,1.44-.47A1.651,1.651,0,0,0,8.6-4.2a1.651,1.651,0,0,0-.52-1.29,2.1,2.1,0,0,0-1.46-.47H4.14a.088.088,0,0,0-.1.1v3.32a.088.088,0,0,0,.1.1Z" transform="translate(8759.78 1654)" fill="#fff"/>
+  </g>
+</svg>

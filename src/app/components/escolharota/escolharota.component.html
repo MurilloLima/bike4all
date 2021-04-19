@@ -1,0 +1,48 @@
+<ion-header style="text-align:center;background-color: rgba(113, 113, 113, 0.9) !important;padding:15px;">
+  <div class="fechar-marcacoes" style="text-align: right;">
+    <a href="javascript:void(0)" title="Cancelar"  (click)="close()">
+       <img src="/assets/images/fechar.png" alt="cancelar" style="width: 26px;">
+    </a>
+  </div>
+  <h2 style="color: #fff;font-weight: 600;color: #fff;font-size: 20px;margin-top: 40px;font-family: barlow;">Escolha uma rota salva</h2>
+</ion-header>
+<ion-content class="ion-text-center">
+  <div style="padding: 15px;margin:15px;height: 92%;overflow: auto;"> 
+    <!-- LOOP ATIVIDADES -->
+           <div class="loop-atividades" *ngIf="gravacoes.length > 0" >
+           
+             <!-- ATIVIDADE SIMPLES -->
+             <div class="atividade atividade-simples"  (click)="escolherrota(x)"
+                  *ngFor="let x of gravacoes" 
+                  style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+             <div class="row">
+                 <!-- FOTO CAPA ATIVIDADE -->
+                 <div class="col-3">
+                   <div class="capa-atividade" 
+                         [style.backgroundImage]="'url(' + x.urlimagem +')'" 
+                         style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                       <a href="javascript:void(0)" title="DETALHES">
+                           &nbsp;
+                       </a>
+                   </div>
+                 </div>
+                 <!-- FOTO CAPA ATIVIDADE -->
+                 <!-- CONTEUDO ATIVIDADE -->
+                 <div class="col-9">
+                   <h2>
+                     {{x.endereco}}
+                     <small>
+                       <span class="dataAtividade">{{x.data}}</span> 
+                       <span class="trajetoAtividade">{{x.distancia}}</span>
+                     </small>
+                   </h2>
+                 </div>
+                 <!-- CONTEUDO ATIVIDADE -->
+             </div>
+             </div>
+             <!-- ATIVIDADE SIMPLES -->
+
+           </div>
+           <!-- LOOP ATIVIDADES -->
+  </div>
+</ion-content>

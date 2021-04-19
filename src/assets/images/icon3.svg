@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64.558" height="79.194" viewBox="0 0 64.558 79.194">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.535" y1="0.112" x2="0.5" y2="0.882" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#3d77a4"/>
+      <stop offset="1" stop-color="#5c9ed8"/>
+    </linearGradient>
+    <filter id="Caminho_114" x="0" y="0" width="64.558" height="79.194" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_637" x="13.142" y="11.711" width="38.562" height="38.562" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_884" data-name="Grupo 884" transform="translate(-9094 -1591.585)">
+    <g transform="matrix(1, 0, 0, 1, 9094, 1591.58)" filter="url(#Caminho_114)">
+      <path id="Caminho_114-2" data-name="Caminho 114" d="M8.469,8.732A29.933,29.933,0,0,1,50.8,51.064L29.635,72.23,8.469,51.064A30.75,30.75,0,0,1,8.469,8.732Z" transform="translate(2.48 1.05)" stroke="#fff" stroke-width="2" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+    </g>
+    <g id="info" transform="translate(9108.642 1603.796)">
+      <g transform="matrix(1, 0, 0, 1, -14.64, -12.21)" filter="url(#Caminho_637)">
+        <path id="Caminho_637-2" data-name="Caminho 637" d="M17.78,0A17.781,17.781,0,1,0,35.562,17.78,17.782,17.782,0,0,0,17.78,0Zm3.7,27.557q-1.373.542-2.19.825a5.778,5.778,0,0,1-1.9.284,3.786,3.786,0,0,1-2.585-.811,2.618,2.618,0,0,1-.92-2.058,7.474,7.474,0,0,1,.068-.992c.047-.337.12-.717.221-1.143l1.146-4.046c.1-.388.188-.757.257-1.1a4.879,4.879,0,0,0,.1-.953,1.467,1.467,0,0,0-.319-1.079,1.813,1.813,0,0,0-1.224-.3,3.212,3.212,0,0,0-.911.135c-.309.095-.577.181-.8.265l.3-1.246q1.124-.458,2.153-.784a6.359,6.359,0,0,1,1.942-.328,3.715,3.715,0,0,1,2.547.8,2.651,2.651,0,0,1,.894,2.071q0,.264-.062.929a6.215,6.215,0,0,1-.229,1.221l-1.14,4.034c-.093.324-.176.694-.251,1.108a5.858,5.858,0,0,0-.11.942,1.353,1.353,0,0,0,.36,1.1,2.014,2.014,0,0,0,1.245.292,3.611,3.611,0,0,0,.942-.146,5.358,5.358,0,0,0,.762-.256Zm-.2-16.374a2.72,2.72,0,0,1-1.919.741,2.748,2.748,0,0,1-1.927-.741,2.364,2.364,0,0,1-.8-1.8,2.388,2.388,0,0,1,.8-1.8,2.728,2.728,0,0,1,1.927-.748,2.7,2.7,0,0,1,1.919.748,2.425,2.425,0,0,1,0,3.6Z" transform="translate(14.64 12.21)" fill="#fff"/>
+      </g>
+    </g>
+  </g>
+</svg>

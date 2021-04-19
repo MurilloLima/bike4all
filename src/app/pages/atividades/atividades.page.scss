@@ -1,0 +1,41 @@
+ion-content {
+    --ion-padding: 0px;
+    --offset-bottom:60px !important;
+}
+ion-toolbar {
+    --ion-toolbar-background:#DB541E;
+    color:#fff !important;
+}
+ion-title {
+    --ion-toolbar-background:#DB541E;
+    color:#fff !important;
+    font-size: 1em;
+    --ion-padding: 0px;
+    padding-left:0px;
+}
+ion-menu-button {
+    color:#fff !important;
+}
+ion-content hr{
+    background-color:#e3e3e3;
+}
+
+
+ion-footer, ion-tabs {
+    z-index: 99;
+    height: 57px;
+    bottom:0;
+    top:unset;
+}
+ion-tab-button {
+    --padding-top: 0;
+--padding-end: 0px;
+--padding-bottom: 0;
+--padding-start: 0px;
+font-family:Barlow;
+font-size:11px;
+font-weight: normal;
+}
+ion-tab-button .ativo {
+    color:#DB541E !important;
+}

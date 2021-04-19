@@ -1,0 +1,171 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Passeios</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  
+
+<!-- CONTENT -->
+
+<section class="content content-gray content-atividades content-passeios">      
+
+  <!-- BUSCA PASSEIOS GERAL -->
+  <div class="busca-passeios-andamento">
+    <div class="row">
+        <div class="col-7">
+            <div class="form-group has-feedback">
+              <ion-input type="text" class="form-control" id="inputSearchPasseios" placeholder="Busque pelo local ou data"  [(ngModel)]="local"
+              (ionChange)="loadDados()" style="float: left;padding-left: 24px;">
+                <i class="fa fa-map-marker" style="position: absolute;top: 35px;"></i>
+              </ion-input>
+            </div>
+        </div>
+        <div class="col-5">
+          <button type="button" class="btn btn-primary" (click)="criar()"><i class="fa fa-plus-circle"></i> Criar passeio</button>
+        </div>
+    </div>
+  </div>
+
+  <!-- BUSCA PASSEIOS GERAL -->
+
+
+  <h3 class="subtitulo" style="margin-bottom: 22px;" *ngIf="meuspasseios!=null && meuspasseios.length>0">Meus passeios criados</h3>
+
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" id="loopAtividadesPasseios" style="background-color: #fff;" *ngIf="meuspasseios!=null && meuspasseios.length>0">
+    <!-- ATIVIDADE COMPLEXA -->
+    <div *ngFor="let x of meuspasseios" class="atividade atividade-complexa" (click)="openMeuPasseio(x)">
+         <div class="capa-atividade"  
+         [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+         style="background-size: cover;background-position: center center;background-color: #f2f2f2; background-repeat:  no-repeat;">
+             <span>{{x.distancia}} km</span>
+             <a href="javascript:void(0)" title="DETALHES">{{x.label}}</a>
+         </div>
+         <h2>
+           {{x.titulo}}
+           <small>
+             <span class="dataAtividade">{{x.data}}</span> • 
+             <span class="temperaturaAtividade">{{x.previsaotempo}}</span> - 
+             <span class="climaAtividade">{{x.previsaoceu}}</span>
+           </small>
+         </h2>
+     </div>
+     <!-- ATIVIDADE COMPLEXA -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+
+  <h3 class="subtitulo" style="margin-bottom: 22px;" *ngIf="passeios!=null && passeios.length>0">Passeios em destaque</h3>
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" id="loopAtividadesPasseios" style="background-color: #fff;" *ngIf="passeios!=null && passeios.length>0">
+    <!-- ATIVIDADE COMPLEXA -->
+    <div *ngFor="let x of passeios" class="atividade atividade-complexa" (click)="openDetalhe(x)">
+         <div class="capa-atividade"  
+         [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+         style="background-size: cover;background-position: center center;background-color: #f2f2f2; background-repeat:  no-repeat;">
+             <span>{{x.distancia}} km</span>
+             <a href="javascript:void(0)" title="DETALHES">{{x.label}}</a>
+         </div>
+         <h2>
+           {{x.titulo}}
+           <small>
+             <span class="dataAtividade">{{x.data}}</span> • 
+             <span class="temperaturaAtividade">{{x.previsaotempo}}</span> - 
+             <span class="climaAtividade">{{x.previsaoceu}}</span>
+           </small>
+         </h2>
+     </div>
+     <!-- ATIVIDADE COMPLEXA -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+  
+
+
+
+  <h3 class="subtitulo" style="margin-bottom: 22px;" *ngIf="passeiosProximos!=null && passeiosProximos.length>0">Passeios próximos a você</h3>
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" style="padding-top: 20px;padding-bottom: 30px;background-color: #fff;" *ngIf="passeiosProximos!=null && passeiosProximos.length>0"> 
+     <!-- ATIVIDADE SIMPLES -->
+     <div *ngFor="let x of passeiosProximos"  class="atividade atividade-simples" (click)="openDetalhe(x)">
+         <div class="row">
+            <!-- FOTO CAPA ATIVIDADE -->
+            <div class="col-3">
+            <div class="capa-atividade" [style.backgroundImage]="'url('+ x.urlimagem +')'"
+                   style="background-size: cover;background-position: center center;background-color: #f2f2f2; background-repeat:  no-repeat;">
+                   <a href="javascript:void(0)" title="DETALHES">
+                      &nbsp;
+                   </a>
+               </div>
+            </div>
+            <!-- FOTO CAPA ATIVIDADE -->
+            <!-- CONTEUDO ATIVIDADE -->
+            <div class="col-9">
+                <h2>{{x.titulo}}
+                 <small>
+                   <span class="dataAtividade">{{x.data}}</span> • 
+                   <span class="temperaturaAtividade">{{x.previsaotempo}}</span> - <span class="nomeClimaAtividade">{{x.previsaoceu}}</span>
+                   <span class="trajetoAtividade">{{x.distancia}} Km </span>
+                 </small>
+               </h2>
+            </div>
+            <!-- CONTEUDO ATIVIDADE -->
+         </div>
+     </div>
+     <!-- ATIVIDADE SIMPLES -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+</section>
+<!-- CONTENT -->
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label class="">Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label class="">Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa"> 
+      <ion-label class="">Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios" class="ativo" >
+      <img src="/assets/images/menu-passeios-ativo.svg" alt="Passeios"> 
+      <ion-label class="ativo">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label class="">Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

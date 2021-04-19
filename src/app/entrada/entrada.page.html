@@ -1,0 +1,104 @@
+﻿
+<ion-content>
+
+    
+<!-- WIZARDS -->
+<section class="wizards">
+    <div class="container">
+       
+       <div id="wizards" class="col-12 owl-carousel">
+           
+           <!-- PÁGINA 1 -->
+           <div class="item">
+              <p>
+                <img src="/assets/images/wizard1.png" alt="CADASTRO DE BIKE">
+              </p>
+              <h2>CADASTRO DE BIKE</h2>
+              <h4>Você sabia que em caso de roubo, as primeiras informações solicitadas pela polícia são o chassi, fotos e nota fiscal de sua Bicicleta? Faça o cadastro de sua bike e tenha tudo isso em sua mão.</h4>
+              <a href="javascript:void(0)" title="PRÓXIMO" class="btn btn-primary" onclick="goCarouselPage(2)">
+                PRÓXIMO <i class="fa fa-angle-right"></i>
+              </a>
+           </div>
+           <!-- PÁGINA 1 -->
+  
+           <!-- PÁGINA 2 -->
+           <div class="item">
+              <p>
+                <img src="/assets/images/wizard2.png" alt="MAPA COMPARTILHADO">
+              </p>
+              <h2>MAPA COMPARTILHADO</h2>
+              <h4>Quer saber a melhor rota para seu destino? Precisa de algum serviço para sua Bike? Digite o endereço e veja as opções de rota e serviços no seu caminho. 
+              E se você quiser somente pedalar sem destino, não tem problema, grave sua rota e compartilhe com seus amigos!</h4>
+              <a href="javascript:void(0)" title="PRÓXIMO" class="btn btn-primary" onclick="goCarouselPage(3)">
+                PRÓXIMO <i class="fa fa-angle-right"></i>
+              </a>
+           </div>
+           <!-- PÁGINA 2 -->
+  
+           <!-- PÁGINA 3 -->
+           <div class="item">
+              <p>
+                <img src="/assets/images/wizard3.png" alt="COMUNIDADE LOCAL">
+              </p>
+              <h2>COMUNIDADE LOCAL</h2>
+              <h4>Gosta de pedalar, mas não curte pedalar sozinho! Entre em uma das milhares de comunidades de pedal espalhadas por todo o país ou crie a sua própria e convide seus amigos!</h4>
+              <a href="javascript:void(0)" title="PRÓXIMO" class="btn btn-primary" onclick="goCarouselPage(4)">
+                PRÓXIMO <i class="fa fa-angle-right"></i>
+              </a>
+           </div>
+           <!-- PÁGINA 3 -->
+  
+           <!-- PÁGINA 4 -->
+           <div class="item">
+              <p>
+                <img src="/assets/images/wizard4.png" alt="PASSEIOS E EVENTOS">
+              </p>
+              <h2>PASSEIOS E EVENTOS</h2>
+              <h4>Tenha sua agenda de pedal em suas mãos! Agenda de passeios e eventos em um só lugar. Quer criar seu próprio evento? Inclua ele no calendário Bike4All e divulgue para toda a comunidade de ciclistas do Brasil.</h4>
+              <a href="javascript:void(0)" title="PRÓXIMO" class="btn btn-primary" onclick="goCarouselPage(5)">
+                PRÓXIMO <i class="fa fa-angle-right"></i>
+              </a>
+           </div>
+           <!-- PÁGINA 4 -->
+  
+           <!-- PÁGINA 5 -->
+           <div class="item">
+              <p>
+                <img src="/assets/images/wizard5.png" alt="PERFORMANCE">
+              </p>
+              <h2>PERFORMANCE</h2>
+              <h4>Se você sempre faz o mesmo percurso de pedal, que tal um comparativo medindo sua eficiência nesse percurso? Compare seu desempenho a cada pedalada, e compartilhe com seus amigos!</h4>
+              <a href="javascript:void(0)" title="PRÓXIMO" class="btn btn-primary" (click)="entrar()">
+                INICIAR <i class="fa fa-angle-right"></i>
+              </a>
+           </div>
+           <!-- PÁGINA 5 -->
+  
+       </div>
+  
+       <div class="container container-dots">
+            <ul id="carousel-custom-dots" class="owl-dots"> 
+                  <li class="owl-dot">&nbsp;</li> 
+                  <li class="owl-dot">&nbsp;</li> 
+                  <li class="owl-dot">&nbsp;</li> 
+                  <li class="owl-dot">&nbsp;</li> 
+                  <li class="owl-dot">&nbsp;</li> 
+                  <li class="owl-dot">&nbsp;</li>            
+            </ul>                 
+        </div>
+        <!-- FECHAR INTRODUÇÃO -->
+        <div class="fechar-wizard">
+          <a href="javascript:void(0)" title="Fechar Introdução"  (click)="entrar()">
+             <img src="/assets/images/pular-wizard.png" alt="Fechar Wizard">
+          </a>
+        </div>
+        <!-- FECHAR INTRODUÇÃO -->
+  
+    </div>
+    
+  <button id="callMyJSFunction" onclick="myJSFunction()" style="display:none;"></button> 
+
+  </section>  
+  <!-- WIZARDS -->
+  
+</ion-content>

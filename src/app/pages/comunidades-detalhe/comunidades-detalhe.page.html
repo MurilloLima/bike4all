@@ -1,0 +1,323 @@
+<ion-header>
+   <ion-toolbar>
+      <ion-buttons slot="start" (click)="voltar()">
+         <ion-button>
+            <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+         </ion-button>
+      </ion-buttons>
+      <ion-title>Comunidades</ion-title>  
+      
+      <ion-buttons slot="end" *ngIf="cadastro.privacidade=='publico' || (cadastro.admin==1 && cadastro.privacidade!='publico')">
+         <ion-button  title="Compartilhar" (click)="compartilhar();">
+            <i class="fa fa-share-alt"></i>
+         </ion-button>
+      </ion-buttons>   
+      <ion-buttons slot="end" *ngIf="(cadastro.admin==0 && cadastro.participa==1)">
+         <ion-button  title="Sair" onclick="sair();">
+            <img src="/assets/images/sair.png" alt="sair" style="width: 20px;"/>
+         </ion-button>
+      </ion-buttons>    
+      <ion-buttons slot="end" *ngIf="cadastro.admin==1">
+         <ion-button  title="Configurações" onclick="configuracoesMinhaComunidade();">
+            <img src="/assets/images/editar.svg" alt="Configurações" />
+         </ion-button>
+      </ion-buttons>   
+   </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<!-- CONTENT -->
+
+<section class="content content-gray content-atividades content-passeios">                  
+
+  <!-- BUSCA PASSEIOS GERAL -->
+  <div class="busca-passeios-andamento" style="padding-top: 11px;padding-bottom: 12px;" *ngIf="cadastro.admin==1">
+   <div class="row">
+       <div class="col-6">
+           <button type="button" class="btn btn-primary" (click)="novoPasseio()"><i class="fa fa-plus-circle"></i> Novo Passeio</button>
+       </div>
+       <div class="col-6">
+          <button type="button" class="btn btn-primary" (click)="novaRota()"><i class="fa fa-plus-circle"></i> Rota Semanal</button>
+       </div>
+   </div>
+</div>
+<!-- BUSCA PASSEIOS GERAL -->
+
+
+<!-- LOOP ATIVIDADES -->
+<div class="loop-atividades" style="padding-bottom: 0px;">
+   
+   <!-- ATIVIDADE COMPLEXA -->
+   <div class="atividade atividade-complexa">
+      <div class="capa-atividade"
+         [style.backgroundImage]="'url(' + (cadastro.urlimagem!=undefined?cadastro.urlimagem:'') + ')'" 
+            style="background-color: #f2f2f2; background-repeat:  no-repeat;background-size: cover;background-position: center center;">
+            <span style="font-size: 15px;"><img src="/assets/images/mini-bike.svg" alt="Ciclistas participando"> {{cadastro.participantes}} Ciclistas participando</span>
+            
+      </div>
+      <h2>
+         {{cadastro.titulo}}
+         <small style="font-size: 13px;">
+            {{cadastro.cidade}}, {{cadastro.uf}}
+         </small>
+         <small>
+            {{cadastro.descricao}} 
+         </small>
+      </h2>
+      
+      <p *ngIf="cadastro.admin==0 && cadastro.participa==0">
+         <a href="javascript:void(0)" (click)="ingressar()" class="btn btn-primary btn-degrade" title="INGRESSAR NA COMUNIDADE">INGRESSAR NA COMUNIDADE</a>
+      </p>    
+   </div>
+   <!-- ATIVIDADE COMPLEXA -->
+</div>
+<!-- LOOP ATIVIDADES -->
+
+<!-- INFORMAÇÕES ADICIONAIS -->
+<div class="informacoes-adicionais">
+   <h4>Progresso da comunidade</h4>
+   
+   <!-- LINHA PROGRESSO -->
+   <div class="row">
+      <div class="col-12">
+         <div class="linha-progresso">
+            <div class="row">
+               <div class="col-6 coluna-um">
+                  Maior distância
+               </div>
+               <div class="col-6 coluna-dois text-right">
+                     {{cadastro.maiordistancia}} km
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- LINHA PROGRESSO -->
+
+   <!-- LINHA PROGRESSO -->
+   <div class="row">
+      <div class="col-12">
+         <div class="linha-progresso">
+            <div class="row">
+               <div class="col-6 coluna-um">
+                  Melhor tempo
+               </div>
+               <div class="col-6 coluna-dois text-right">
+                  {{cadastro.melhortempo}}  min
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- LINHA PROGRESSO -->
+
+
+   <!-- LINHA PROGRESSO -->
+   <div class="row">
+      <div class="col-12">
+         <div class="linha-progresso linha-progresso-degrade">
+            <div class="row">
+               <div class="col-8 coluna-um">
+                  Total de km da comunidade
+               </div>
+               <div class="col-4 coluna-dois text-right">
+                  {{cadastro.totalkilometros}}  km
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- LINHA PROGRESSO -->
+
+
+
+   <!-- LINHA PROGRESSO -->
+   <div class="row">
+      <div class="col-12">
+         <div class="linha-progresso linha-progresso-degrade">
+            <div class="row">
+               <div class="col-9 coluna-um">
+                  Atividades realizadas
+               </div>
+               <div class="col-3 coluna-dois text-right">
+                  {{cadastro.atividadesrealizadas}} 
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   <!-- LINHA PROGRESSO -->
+</div>
+<!-- INFORMAÇÕES ADICIONAIS -->
+
+ <h3 class="subtitulo" style="margin-bottom: 22px;margin-top: 42px;">Rotas semanais</h3>
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" style="background-color: #fff;padding-top:25px;margin-bottom: 120px;">    
+     <!-- ATIVIDADE SIMPLES -->
+     <div class="atividade atividade-simples" *ngFor="let x of rotas" (click)="openRota(x.id)">
+         <div class="row">
+            <!-- FOTO CAPA ATIVIDADE -->
+            <div class="col-3">
+                <div class="capa-atividade" 
+                     [style.backgroundImage]="'url(/assets/images/mapa.jpg)'" 
+                     style="background-color: #f2f2f2; background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                   <a href="javascript:void(0)" title="DETALHES">
+                      &nbsp;
+                   </a>
+               </div>
+            </div>
+            <!-- FOTO CAPA ATIVIDADE -->
+            <!-- CONTEUDO ATIVIDADE -->
+            <div class="col-9">
+                <h2>{{ x.titulo }}
+                 <small>
+                   <span class="dataAtividade">{{ x.datadescricao }}</span> • 
+                   <span class="temperaturaAtividade">saída às {{x.horario}}</span>
+                   <span class="trajetoAtividade">{{ x.distancia }} Km</span>
+                 </small>
+              </h2>
+            </div>
+            <!-- CONTEUDO ATIVIDADE -->
+        </div>
+     </div>
+     <!-- ATIVIDADE SIMPLES -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+
+
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" style="display: none;">    
+     <!-- ATIVIDADE COMPLEXA -->
+     <div class="atividade atividade-complexa" data-local="Passeio final da primavera - Parque Celseo Daniel, Santo André">
+
+         <div class="capa-atividade" style="background: url('/assets/images/capa-atividade.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center;">
+
+             <span>6.7 km</span>
+
+             <a href="javascript:void(0)" title="DETALHES">
+
+                DETALHES
+
+             </a>
+
+         </div>
+
+         <h2>
+
+           Passeio final da primavera - Parque Celseo Daniel, Santo André
+
+           <small>
+
+             <span class="dataAtividade">12 de Outubro</span> • 
+
+             <span class="temperaturaAtividade">22ºC</span> - 
+
+             <span class="climaAtividade">Nublado</span>
+
+           </small>
+
+         </h2>
+
+     </div>
+    <!-- ATIVIDADE COMPLEXA -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+
+  <h3 class="subtitulo" style="margin-bottom: 22px;margin-top: 0px;" style="display: none;">Passeios realizados pela comunidade</h3>
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" style="padding-bottom: 165px;" style="display: none;">   
+     <!-- ATIVIDADE SIMPLES -->
+     <div class="atividade atividade-simples">
+         <div class="row">
+            <!-- FOTO CAPA ATIVIDADE -->
+            <div class="col-3">
+                <div class="capa-atividade" style="background: url('/assets/images/capa-atividade.png') #f2f2f2 no-repeat;background-size: cover;background-position: center center;">
+                   <a href="javascript:void(0)" title="DETALHES">
+                      &nbsp;
+                   </a>
+               </div>
+            </div>
+            <!-- FOTO CAPA ATIVIDADE -->
+            <!-- CONTEUDO ATIVIDADE -->
+            <div class="col-9">
+                <h2>
+                 Passeio final da primavera - Parque Celseo Daniel, Santo André
+                 <small>
+                   <span class="dataAtividade">12 de Outubro</span> • 
+                   <span class="temperaturaAtividade">22ºC</span> - <span class="nomeClimaAtividade">Nublado</span>
+                   <span class="trajetoAtividade">6.7 Km</span>
+                 </small>
+               </h2>
+            </div>
+           <!-- CONTEUDO ATIVIDADE -->
+        </div>
+     </div>
+     <!-- ATIVIDADE SIMPLES -->
+  </div>
+  <!-- LOOP ATIVIDADES -->
+  
+</section>
+
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label>Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label>Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa">
+      <ion-label>Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label>Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label>Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->
+<section class="iniciar-marcacoes" id="configuracoesComunidade">   
+   <div class="fechar-marcacoes">
+    <a href="javascript:void(0)" title="Cancelar" onclick="fecharIniciarMarcacoes('#configuracoesComunidade')">
+       <img src="/assets/images/fechar.png" alt="cancelar">
+    </a>
+  </div>
+  <h2>Configurações<br>Minha Comunidade</h2>
+  <div class="row">
+    <div class="col-12">
+       <div class="caixa-branca">          
+           <nav>
+             <ul>
+               <li *ngIf="cadastro.admin==1" style="display: none;"><a href="javascript:fecharIniciarMarcacoes('#configuracoesComunidade')" title="Convidar novo administrador" (click)="convidarAdmin()">Convidar novo administrador</a></li>
+               <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesComunidade')" title="Editar comunidade" (click)="editarComunidade()">Editar comunidade</a></li>
+               <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesComunidade')" title="Mudar comunidade" (click)="mudarPrivacidade()">Tornar comunidade {{cadastro.privacidade=='publico' ? 'privada' : 'publica'}}</a></li>
+               <li *ngIf="cadastro.admin==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesComunidade')" title="Excluir comunidade" style="color:#DB541E !important;" (click)="excluirComunidade()">Excluir comunidade</a></li>
+               <li *ngIf="cadastro.admin==0 && cadastro.participa==1"><a href="javascript:fecharIniciarMarcacoes('#configuracoesComunidade')" title="Sair comunidade" style="color:#DB541E !important;" (click)="sair()">Sair comunidade</a></li>
+               <li style="text-align: center;">
+                  Código para convite
+                  <br><a (click)="copiar()"><b>https://bike4all.com.br/c/?d={{cadastro.codigoconvite }} <br>
+                    <i class="fa fa-copy"></i></b></a>
+                  <br><a (click)="compartilhar()">Compartilhar</a>
+                </li>
+             </ul>
+           </nav>
+       </div>
+    </div>
+  </div>
+</section>
+<!-- INICIAR MARCAÇÕES ALERTA DE ROUBO -->

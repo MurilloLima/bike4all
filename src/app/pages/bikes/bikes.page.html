@@ -1,0 +1,150 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-button>
+        <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Bikes</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="scroll-content">
+
+<!-- CONTENT -->
+<section class="content content-gray content-atividades content-passeios content-add-bike">      
+  <!-- NOME DA BIKE -->
+  <div class="busca-passeios-andamento ajuste-padding">
+    <div class="row">
+        <div class="col-12">
+            <div class="form-group">
+              <label>Nome</label>
+              <input type="text" class="form-control"  placeholder="Dê um nome para sua bike" [(ngModel)]="cadastro.nome">
+            </div>
+        </div>              
+    </div>
+  </div>
+  <!-- NOME DA BIKE -->
+
+  <!-- UPLOAD FOTO DE DESTAQUE -->
+  <div class="upload-foto-destaque">
+    <div class="row">
+       <div class="col-12">
+           <div class="form-group" style="margin-bottom: 1px;">
+              <label>Fotos</label>
+           </div>
+       </div>
+       <div class="col-12">
+         <div class="row">
+           <div class="col-3" style="margin-bottom: 1px;" *ngFor="let x of fotos">
+                  <img src="{{x.imagem}}" style="max-width: 100%;">
+           </div>
+        </div>
+       </div>
+    </div>
+    <div class="row" (click)="selectImage()">
+       <div class="col-2">
+           <a href="javascript:void(0)" title="Adicionar foto de destaque ao passeio">
+              <img src="/assets/images/add-photo-passeio.png" alt="Adicionar foto de destaque ao passeio">
+           </a>
+       </div>
+       <div class="col-10">
+          Adicionar fotos da minha bike
+          <small>Aconselhamos subir as fotos da nota-fiscal e chassis para eventual necessidade.</small>
+       </div>
+    </div>
+ </div>
+  <!-- UPLOAD FOTO DE DESTAQUE --> 
+
+  <!--OUTRAS INFOS -->
+  <div class="busca-passeios-andamento ajuste-padding" style="padding-bottom: 120px;">
+           <div class="row">
+               <div class="col-12">
+                  <label>Número de série/ chassi <i class="fa fa-question-circle-o"></i></label>
+                   <div class="form-group" *ngFor="let x of chassi">
+                      <input type="text" class="form-control" placeholder="0AA000000" [(ngModel)]="x.numero">
+                   </div>
+                   <a (click)="addLinhaChassi()" style="text-align: center; display:block;">(+)Adicionar linha</a>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="col-12">
+                   <div class="form-group">
+                      <label>Tipo de bicicleta</label>
+                      <select class="form-control" [(ngModel)]="cadastro.tipobicicleta">
+                        <option value="">Escolha</option>
+                         <option value="estrada">Estrada</option>
+                         <option value="mtb">MTB</option>
+                         <option value="hibrida">Híbrida</option>
+                         <option value="dobravel">Dobrável</option>
+                         <option value="eletrica">Elétrica</option>
+                         <option value="fixa">Fixa</option>
+                         <option value="Urbana">Urbana</option>
+                         <option value="outras">Outras</option>
+                      </select>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="row">
+               <div class="col-12">
+                   <div class="form-group">
+                      <label>Marca</label>
+                      <select class="form-control" [(ngModel)]="cadastro.marca">
+                        <option value="">Escolha</option>
+                         <option value="Caloi">Caloi</option>
+                         <option value="Hynston">Hynston</option>
+                         <option value="Outras  ">Outras</option>
+                      </select>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="row">
+               <div class="col-12">
+                   <div class="form-group">
+                      <label>Cor</label>
+                      <select class="form-control" [(ngModel)]="cadastro.cor">
+                        <option value="">Escolha</option>
+                        <option value="Branca">Branca</option>
+                        <option value="Amarela">Amarela</option>
+                        <option value="Vermelha">Vermelha</option>
+                        <option value="Azul">Azul</option>
+                        <option value="Verde">Verde</option>
+                        <option value="Cinza">Cinza</option>
+                         <option value="Preta">Preta</option>
+                      </select>
+                   </div>
+               </div>
+           </div>
+
+
+           <div class="row">
+               <div class="col-12">
+                   <div class="form-group">
+                      <label>Modelo</label>
+                      <input type="text" class="form-control" placeholder="Informe o modelo" [(ngModel)]="cadastro.modelo">
+                   </div>
+               </div>
+           </div>
+
+
+  </div>
+  <!-- OUTRAS INFOS  -->
+
+  <!-- AREA BTN CRIAR PASSEIO -->
+<div class="area-btn-criar-passeio" style="bottom:0px; ">
+    <a href="javascript:void(0)" title="CADASTRAR BIKE" class="btn btn-primary" (click)="salvarDados()">
+       CADASTRAR BIKE
+    </a>
+ </div>
+  <!-- AREA BTN CRIAR PASSEIO -->
+</section>
+<!-- CONTENT -->
+</ion-content>
+

@@ -1,0 +1,263 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Meu Perfil</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+
+  
+<!-- CONTENT -->
+<section class="content content-gray content-atividades content-meu-perfil">
+  <!-- BOTÕES DAS ABAS -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a [class]="(ativo=='perfil') ? 'nav-link active':'nav-link'" id="meusdados-tab" data-toggle="tab" href="#meusdados" role="tab" aria-controls="meusdados" aria-selected="true">Meus Dados</a>
+        </li>
+        <li class="nav-item">
+          <a [class]="(ativo=='bikes') ? 'nav-link active':'nav-link'" id="registrobike-tab" data-toggle="tab" href="#registrobike" role="tab" aria-controls="registrobike" aria-selected="false">Registro de Bike</a>
+        </li>
+  </ul>
+  <!-- BOTÕES DAS ABAS -->
+
+  <!-- CONTEÚDO DAS ABAS -->
+  <div class="tab-content tab-content-meu-perfil" id="tabsDadosPerfil">
+        <!-- MEUS DADOS -->
+        <div [class]="(ativo=='perfil') ? 'tab-pane fade active show':'tab-pane fade'" id="meusdados" role="tabpanel" aria-labelledby="meusdados-tab">
+            <div class="titulo-sessoes-perfil">
+               Dados cadastrais
+            </div>       
+            <!-- EDIÇÃO DOS DADOS -->
+            <div class="form-edicao-perfil">
+                  <div class="foto-perfil" 
+                  [style.backgroundImage]="'url(' + fotoUrl + ')'" 
+                  style="background-color: #f2f2f2;background-repeat:  no-repeat;background-size: cover;background-position: center center;">
+                     <a href="javascript:void(0)" title="Editar foto de perfil">
+                         <img src="/assets/images/editar-foto-perfil.svg" alt="Editar foto de perfil" (click)="selectImage()">
+                     </a>
+                  </div>
+                  
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-12">
+                         <div class="form-group">
+                             <label>Nome</label>
+                             <input type="text" class="form-control" [(ngModel)]="cadastro.nome"  placeholder="Nome do usuário">
+                         </div>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-6">
+                        <div class="form-group">
+                             <label>Estado</label>
+                             <select name="estado" class="form-control" [(ngModel)]="cadastro.estado" >
+                                <option value="">Selecione um estado</option>
+                                <option value="AC">Acre</option>
+                                <option value="AL">Alagoas</option>
+                                <option value="AP">Amapá</option>
+                                <option value="AM">Amazonas</option>
+                                <option value="BA">Bahia</option>
+                                <option value="CE">Ceará</option>
+                                <option value="DF">Distrito Federal</option>
+                                <option value="ES">Espírito Santo</option>
+                                <option value="GO">Goiás</option>
+                                <option value="MA">Maranhão</option>
+                                <option value="MT">Mato Grosso</option>
+                                <option value="MS">Mato Grosso do Sul</option>
+                                <option value="MG">Minas Gerais</option>
+                                <option value="PA">Pará</option>
+                                <option value="PB">Paraíba</option>
+                                <option value="PR">Paraná</option>
+                                <option value="PE">Pernambuco</option>
+                                <option value="PI">Piauí</option>
+                                <option value="RJ">Rio de Janeiro</option>
+                                <option value="RN">Rio Grande do Norte</option>
+                                <option value="RS">Rio Grande do Sul</option>
+                                <option value="RO">Rondônia</option>
+                                <option value="RR">Roraima</option>
+                                <option value="SC">Santa Catarina</option>
+                                <option value="SP">São Paulo</option>
+                                <option value="SE">Sergipe</option>
+                                <option value="TO">Tocantins</option>
+                             </select>
+                         </div>
+                      </div>
+                      <div class="col-6">
+                         <div class="form-group">
+                             <label>Cidade</label>
+                             <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]="cadastro.cidade">
+                         </div>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-6">
+                         <div class="form-group">
+                             <label>Data de nascimento</label>
+                             <input type="date" class="form-control" [(ngModel)]="cadastro.datanascimento" placeholder="dd/mm/YYYY">
+                         </div>
+                      </div>
+                      <div class="col-6">
+                         <div class="form-group">
+                             <label>Sexo</label>
+                             <select class="form-control" [(ngModel)]="cadastro.sexo">
+                                <option>Selecione uma opção</option>
+                                <option value="masculino">Masculino</option>
+                                <option value="feminino">Feminino</option>
+                                <option value="semresposta">Prefiro não responder</option>
+                             </select>
+                         </div>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-12">
+                         <h3 class="subtitulo">Informações de login</h3>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-12">
+                         <div class="form-group">
+                             <label>E-mail</label>
+                             <input type="text" class="form-control" placeholder="Seu e-mail para acesso" [(ngModel)]="cadastro.email">
+                         </div>
+                      </div>
+                      <div class="col-12">
+                         <div class="form-group">
+                             <label>Senha</label>
+                             <input type="password" class="form-control" placeholder="Senha para acesso" [(ngModel)]="cadastro.senha">
+                         </div>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+
+                  <!-- LINHA -->
+                  <div class="row">
+                      <div class="col-8 offset-2">
+                         <div class="form-group">
+                             <button type="button" class="btn btn-primary" (click)="salvarDados()">ALTERAR INFORMAÇÕES</button>
+                         </div>
+                      </div>
+                  </div>
+                  <!-- LINHA -->
+
+
+            </div>
+            <!-- EDIÇÃO DOS DADOS -->
+        </div>
+        <!-- MEUS DADOS -->
+
+        <!-- BIKES CADASTRADAS -->
+        <div [class]="(ativo=='bikes') ? 'tab-pane fade active show':'tab-pane fade'" id="registrobike" role="tabpanel" aria-labelledby="registrobike-tab" style="padding-bottom:120px">            
+            <div class="titulo-sessoes-perfil">
+               Bikes cadastradas
+            </div>
+            <nav class="loop-minhas-bikes">
+              <ul id="loopMinhasBikes">   
+                    <!-- BIKE -->
+                    <li *ngFor="let x of bikes">
+                      <div class="row">
+                         <div class="col-3 coluna-um" (click)="abrirBike(x.id)">
+                            <div class="foto-bike"
+                            [style.backgroundImage]="'url(' + x.imagemurl + ')'" 
+                            style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                               <a href="javascript:void(0)" title="Ver detalhes ou editar">
+                                  &nbsp;
+                               </a>
+                            </div>
+                         </div>
+                         <div class="col-7 coluna-dois" (click)="abrirBike(x.id)">
+                            <h4>
+                              {{x.nome}}<br clear="both">
+                              <small>{{x.modelo}}</small>
+                            </h4>
+                            <span>{{x.situacao}}</span>
+                         </div>
+                         <div class="col-2 coluna-tres text-center" (click)="openMenuBike(x.id)">
+                            <a title="Mais opções sobre essa bike">
+                               <img src="/assets/images/mais-opcoes-bike.svg" alt="Mais opções sobre essa bike">
+                            </a>
+                         </div>
+                      </div>
+                    </li>
+                    <!-- BIKE -->
+              </ul>
+           </nav>
+           <!-- CADASTRAR NOVA BIKE -->
+            <div class="row">
+               <div class="col-10 offset-1">
+                   <a href="javascript:void(0)" title="CADASTRAR NOVA BIKE" class="btn btn-primary" (click)="cadastrarBike()">
+                      CADASTRAR NOVA BIKE
+                   </a>
+               </div>
+            </div>
+           <!-- CADASTRAR NOVA BIKE -->
+        </div>
+        <!-- BIKES CADASTRADAS -->
+  </div>
+ <!-- CONTEÚDO DAS ABAS -->
+
+</section>
+
+<!-- CONTENT -->
+
+
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label>Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label>Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa">
+      <ion-label>Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label>Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label>Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

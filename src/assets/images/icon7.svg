@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="64.758" height="79.436" viewBox="0 0 64.758 79.436">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.7" y1="0.107" x2="0.233" y2="0.891" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#db541e"/>
+      <stop offset="1" stop-color="#e2764b"/>
+    </linearGradient>
+    <filter id="Caminho_114" x="0" y="0" width="64.758" height="79.436" filterUnits="userSpaceOnUse">
+      <feOffset dy="3" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_635" x="13.242" y="12.145" width="37.784" height="35.811" filterUnits="userSpaceOnUse">
+      <feOffset dy="1" input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="0.5" result="blur-2"/>
+      <feFlood flood-opacity="0.161"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_888" data-name="Grupo 888" transform="translate(-9051.899 -1540.485)">
+    <g id="Grupo_875" data-name="Grupo 875" transform="translate(9054.499 1541.585)">
+      <g transform="matrix(1, 0, 0, 1, -2.6, -1.1)" filter="url(#Caminho_114)">
+        <path id="Caminho_114-2" data-name="Caminho 114" d="M8.469,8.732A29.934,29.934,0,0,1,50.8,51.064L29.635,72.23,8.469,51.064A30.75,30.75,0,0,1,8.469,8.732Z" transform="translate(2.58 1.15)" stroke="#fff" stroke-width="2.2" fill-rule="evenodd" fill="url(#linear-gradient)"/>
+      </g>
+      <g id="warning" transform="translate(12.142 11.545)">
+        <g id="Grupo_874" data-name="Grupo 874" transform="translate(0 0)">
+          <g transform="matrix(1, 0, 0, 1, -14.74, -12.65)" filter="url(#Caminho_635)">
+            <path id="Caminho_635-2" data-name="Caminho 635" d="M34.078,39.661l-12.3-22.646a5.1,5.1,0,0,0-8.772,0l-.02.036L.725,39.626a5.1,5.1,0,0,0,4.385,7.7H29.6a5.154,5.154,0,0,0,4.5-2.578A5.027,5.027,0,0,0,34.078,39.661ZM15.351,24.888a2.04,2.04,0,1,1,4.08,0v8.161a2.04,2.04,0,0,1-4.08,0Zm2.04,18.362a3.06,3.06,0,1,1,3.06-3.06A3.064,3.064,0,0,1,17.391,43.25Z" transform="translate(14.74 -1.87)" fill="#fff"/>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

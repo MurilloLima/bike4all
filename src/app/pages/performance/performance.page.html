@@ -1,0 +1,394 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Performance</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>   
+
+<!-- HEADER -->
+
+<ion-content>
+
+  
+<!-- CONTENT -->
+<section class="content content-gray content-performance" style="overflow: auto;">   
+  <!-- BOTÕES DAS ABAS -->
+  <ul class="nav nav-tabs" id="myTab" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" id="geral-tab" data-toggle="tab" href="#geral" role="tab" aria-controls="geral" aria-selected="true" (click)="load('geral')">Geral</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="passeios-tab" data-toggle="tab" href="#passeios" role="tab" aria-controls="passeios" aria-selected="true">Passeios</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="rotasSemanais-tab" data-toggle="tab" href="#rotasSemanais" role="tab" aria-controls="rotasSemanais" aria-selected="false" >Rotas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" id="destinosSalvos-tab" data-toggle="tab" href="#destinosSalvos" role="tab" aria-controls="destinosSalvos" aria-selected="false" >Destinos</a>
+        </li>       
+  </ul>
+  <!-- BOTÕES DAS ABAS -->
+
+
+ <!-- CONTEÚDO DAS ABAS -->
+  <div class="tab-content" id="tabsPerformance">
+
+        <!-- GERAL -->
+        <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">            
+             <h3 class="subtitulo" style="margin-bottom: 22px;">Gráfico de desempenho</h3>           
+             <!-- GRAFICOS E ESTATISTICAS -->
+             <div class="graficos" style="overflow: hidden;">
+                <!-- LINHA DOIS -->
+                <div class="row linha-dois">
+                  <div class="col">
+                    <h2 (click)="loadGrafico('tempo')" [class]="(tipoGrafico=='tempo') ? 'active':''">
+                      <small>TEMPO</small>
+                      <span>{{convertTempo(graficoDados.tempo,'horas')}}</span>
+                    </h2>
+                  </div>
+                  <div class="col">
+                    <h2 (click)="loadGrafico('velocidade')" [class]="(tipoGrafico=='velocidade') ? 'active':''">
+                      <small>VELOC. MÉDIA</small>
+                      <span>{{graficoDados.velocidademedia}}<u>km/h</u></span>
+                    </h2>
+                  </div>
+                  <div class="col">
+                    <h2 (click)="loadGrafico('distancia')" [class]="(tipoGrafico=='distancia') ? 'active':''">
+                      <small>DISTÂNCIA</small>
+                      <span>{{graficoDados.distancia}}<u>KM</u> </span>
+                    </h2>
+                  </div>
+                  <div class="col">
+                    <h2 (click)="loadGrafico('calorias')" [class]="(tipoGrafico=='calorias') ? 'active':''">
+                      <small>CALORIAS</small>
+                      <span>{{graficoDados.calorias}} </span>
+                    </h2>
+                  </div>
+                </div>
+                <!-- LINHA DOIS -->
+                <div class="grafico">
+                  <canvas id="graficoPerformance"></canvas>
+                </div>
+                <div class="actions-grafico">
+                  <div class="row">
+
+                      <div class="col-12" style="text-align: center;">
+                          <h3>
+                            <input type="date"  [(ngModel)]="datainicioGrafico" (change)="loadPerformanceGrafico('geral')"  /> - <input type="date" [(ngModel)]="datafimGrafico"  (change)="loadPerformanceGrafico('geral')" />
+                          </h3>
+                      </div>
+
+                  </div>
+                </div>
+
+            </div>
+            <!-- GRAFICOS E ESTATISTICAS -->
+
+            <!-- CONQUISTAS-->
+            
+
+            <div class="graficos" style="display: none;">
+                   <h3 class="subtitulo">Conquistas</h3>
+                   <div class="loop-conquistas">
+                      <div class="row">
+                          <div class="col-3">
+                             <a href="javascript:void(0)" title="Nome da conquista">
+                                <img src="/assets/images/conquista-1.png" alt="Nome da conquista">
+                             </a>
+                          </div>
+                          <div class="col-3">
+                             <a href="javascript:void(0)" title="Nome da conquista">
+                                <img src="/assets/images/conquista-2.png" alt="Nome da conquista">
+                             </a>
+                          </div>
+                          <div class="col-3">
+                             <a href="javascript:void(0)" title="Nome da conquista">
+                                <img src="/assets/images/conquista-3.png" alt="Nome da conquista">
+                             </a>
+                          </div>
+                          <div class="col-3">
+                             <a href="javascript:void(0)" title="Nome da conquista">
+                                <img src="/assets/images/conquista-4.png" alt="Nome da conquista">
+                             </a>
+                          </div>
+                      </div>
+                   </div>
+            </div>
+            <!-- CONQUISTAS -->
+             
+            <!-- RESUMO-->
+            <div class="graficos">
+                <table class="table">
+                      <thead>
+                        <th colspan="2">
+                          Resumo
+                        </th>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>Distância</td>
+                          <td>{{dados.distancia }} km</td>
+                        </tr>
+                        <tr>
+                          <td>Tempo</td>
+                          <td>{{dados.tempo}}</td>
+                        </tr>
+                        <tr>
+                          <td>Pedaladas</td>
+                          <td>{{dados.pedaladas}}</td>
+                        </tr>
+                        <tr>
+                          <td>Calorias</td>
+                          <td>{{dados.calorias}} cal</td>
+                        </tr>
+                      </tbody>
+                  </table>
+
+                  <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Ganho de elevação</td>
+                          <td>{{dados.ganhoelevacao}}</td>
+                        </tr>
+                        <tr>
+                          <td>Maior elevação</td>
+                          <td>{{dados.maiorelevacao}}</td>
+                        </tr>
+                        <tr>
+                          <td>Menor elevação</td>
+                          <td>{{dados.menorelevacao}}</td>
+                        </tr>
+                      </tbody>
+                  </table>
+
+                  <table class="table">
+                      <tbody>
+                        <tr>
+                          <td>Melhor tempo</td>
+                          <td>{{convertTempo(dados.melhortempo,'horas')}}</td>
+                        </tr>
+                        <tr>
+                          <td>Maior distância</td>
+                          <td>{{dados.maiordistancia}} km</td>
+                        </tr>
+                        <tr>
+                          <td>Velocidade média</td>
+                          <td>{{dados.velocidademedia}} km/h</td>
+                        </tr>
+                      </tbody>
+                  </table>
+
+                  <p>&nbsp;</p>
+
+                  <div class="actions-grafico">
+                    <div class="row">
+                        <div class="col-12" style="text-align: center;">
+                            <h3><input type="date"  [(ngModel)]="datainicio" (change)="loadPerformance('geral')"  /> - <input type="date" [(ngModel)]="datafim"  (change)="loadPerformance('geral')" />
+                            </h3>
+                        </div>
+
+                    </div>
+                  </div>
+                  
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+                  <p>&nbsp;</p>
+            </div>
+            <!-- RESUMO -->
+        </div>
+       <!-- GERAL -->
+
+       <!-- PASSEIOS -->
+       <div class="tab-pane fade" id="passeios" role="tabpanel" aria-labelledby="passeios-tab">
+           <!-- BUSCA PASSEIOS EM ANDAMENTO -->
+           <div class="busca-passeios-andamento" style="display: none;">
+                <div class="row">
+                    <div class="col-7">
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" id="inputSearchPasseios" placeholder="Busque pelo local ou data" onkeyup="filtroPasseiosPerformance();">
+                            <i class="fa fa-map-marker"></i>
+                        </div>
+                    </div>
+                    <div class="col-5">
+                        <button type="button" class="btn btn-primary"><i class="fa fa-plus-circle"></i> Add registro</button>
+                    </div>
+                </div>
+           </div>
+           <!-- BUSCA PASSEIOS EM ANDAMENTO -->
+           
+          <!-- PASSEIOS EM ANDAMENTO -->
+          <div class="graficoss">
+            <h3 class="subtitulo">Passeios em andamento</h3>
+            <div class="loop-atividades">
+                <div class="atividade atividade-simples" *ngFor="let x of passeios" (click)="openPasseio(x.id)"
+                  style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+                  <div class="row">
+                    <div class="col-3">
+                        <div class="capa-atividade" 
+                        [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                        style="background-color:  #f2f2f2 no-repeat;background-size: cover;background-position: center center;">
+                            <a href="javascript:void(0)" title="DETALHES">
+                              &nbsp;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <h2>
+                          {{x.titulo}}
+                          <small>
+                            <span class="dataAtividade">{{x.data}}</span> • 
+                            <span class="temperaturaAtividade">{{x.distancia}}</span>
+                          </small>
+                        </h2>
+                        <div class="progress">
+                          <div class="progress-bar" role="progressbar" [style.width]="x.percentual + '%'"  aria-valuemin="0" aria-valuemax="100">
+                            <div class="bolinha-enfeite"></div>
+                          </div>
+                        </div>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>      
+         <!-- PASSEIOS EM ANDAMENTO -->
+        </div>
+        <!-- PASSEIOS -->
+
+        <!-- ROTAS SEMANAIS -->
+        <div class="tab-pane fade" id="rotasSemanais" role="tabpanel" aria-labelledby="rotasSemanais-tab">
+
+          <!-- PASSEIOS EM ANDAMENTO -->
+          <div class="graficoss">
+            <h3 class="subtitulo">Rotas realizadas</h3>
+            <div class="loop-atividades">
+
+                
+              <!-- ATIVIDADE SIMPLES -->
+              <div class="atividade atividade-simples"  (click)="openRota(x.id)"
+                    *ngFor="let x of rotas" 
+                    style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+                  <div class="row">
+                      <!-- FOTO CAPA ATIVIDADE -->
+                      <div class="col-3">
+                        <div class="capa-atividade" 
+                              [style.backgroundImage]="'url(' + x.urlimagem +')'" 
+                              style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                            <a href="javascript:void(0)" title="DETALHES">
+                                &nbsp;
+                            </a>
+                        </div>
+                      </div>
+                      <!-- FOTO CAPA ATIVIDADE -->
+                      <!-- CONTEUDO ATIVIDADE -->
+                      <div class="col-9">
+                        <h2>
+                          {{x.titulo}}
+                          <small>
+                            <span class="dataAtividade">{{x.datadescricao}}</span> 
+                            <span class="trajetoAtividade">{{x.distancia}}</span>
+                          </small>
+                        </h2>
+                      </div>
+                      <!-- CONTEUDO ATIVIDADE -->
+                  </div>
+                </div>
+                <!-- ATIVIDADE SIMPLES -->
+              
+              </div>
+            </div>  
+         <!-- PASSEIOS EM ANDAMENTO -->
+        </div>
+
+        <!-- ROTAS SEMANAIS -->
+
+        <!-- DESTINOS SALVOS -->
+        <div class="tab-pane fade" id="destinosSalvos" role="tabpanel" aria-labelledby="destinosSalvos-tab">
+
+          <!-- PASSEIOS EM ANDAMENTO -->
+          <div class="graficose">
+            <h3 class="subtitulo">Destinos realizados</h3>
+            <div class="loop-atividades">
+                <div class="atividade atividade-simples" *ngFor="let x of destinos" (click)="openDestino(x.id, x.tipo)"
+                  style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+                  <div class="row">
+                    <div class="col-3">
+                        <div class="capa-atividade" 
+                        [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                        style="background-color:  #f2f2f2 no-repeat;background-size: cover;background-position: center center;">
+                            <a href="javascript:void(0)" title="DETALHES" >
+                              &nbsp;
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-9">
+                        <h2>
+                          {{x.nome}}
+                          <small>
+                            <span class="dataAtividade">{{x.data}}</span> • 
+                            <span class="temperaturaAtividade">{{x.distancia}} km</span>
+                          </small>
+                        </h2>
+                    </div>
+                  </div>
+              </div>
+            </div>
+          </div>      
+         <!-- PASSEIOS EM ANDAMENTO -->
+        </div>
+
+        <!-- DESTINOS SALVOS -->
+
+  </div>
+  <!-- CONTEÚDO DAS ABAS -->
+</section>
+<!-- CONTENT -->
+ 
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label class="">Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance" class="ativo" >
+      <img src="/assets/images/menu-performance-ativo.svg" alt="Performance"> 
+      <ion-label class="ativo">Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa"> 
+      <ion-label class="">Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label class="">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades">
+      <img src="/assets/images/menu-comunidades.svg" alt="Comunidades"> 
+      <ion-label class="">Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
+
+

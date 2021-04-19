@@ -1,0 +1,109 @@
+<ion-split-pane>
+    <ion-menu side="start" menuId="principal" contentId="content">
+        <ion-header class="ion-text-right">
+            <!-- FECHAR SIDEMENU -->
+            <div class="voltar-fechar-sidemenu" style="margin-right: 20px;">
+                <a href="javascript:void(0)" title="Fechar" auto-hide="false"  (click)="closeMenu()">
+                    <img src="/assets/images/voltar-direcao-esquerda.svg" alt="Fechar">
+                </a>
+            </div>
+            <!-- FECHAR SIDEMENU -->
+        </ion-header>
+        <ion-content>
+            <div style="padding:20px;">
+                <div class="widget-perfil">
+                    <div class="row">
+                        <div class="col-3">
+                            <div class="foto-perfil" 
+                                [style.backgroundImage]="'url(' + user.urlimagem + ')'" 
+                                style="background-color: #f2f2f2;background-repeat:  no-repeat;background-size: cover;background-position: center center;">
+                                <a href="javascript:void(0)" title="Ver meu perfil">&nbsp;</a>
+                            </div>
+                        </div>
+                        <div class="col-9">
+                            <h4><a href="javascript:void(0)" title="Ver meu perfil">{{user.nome}}</a></h4>
+                        </div>
+                    </div>
+                </div>
+
+                <ion-list>
+                    <ion-menu-toggle auto-hide="false" *ngFor="let p of pages">
+                        <ion-item [routerLink]="p.url" routerDirection="root" [class.active-item]="selectedPath===p.url">                       
+                            {{ p.title }}
+                            <i class="fa fa-angle-right" slot="end" style="color:#A7A7A7"></i>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    
+                    <ion-menu-toggle auto-hide="false" >
+                        <ion-item  (click)="openAlertaRoubo()" routerDirection="root"  >                       
+                            Alerta de roubo
+                            <i class="fa fa-angle-right" slot="end" style="color:#A7A7A7"></i>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle auto-hide="false" >
+                        <ion-item  (click)="openAjuda()" routerDirection="root"  >                       
+                            Central de ajuda 
+                            <i class="fa fa-angle-right" slot="end" style="color:#A7A7A7"></i>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle auto-hide="false" >
+                        <ion-item  (click)="openTermo()" routerDirection="root" >                       
+                            Termos de uso e privacidade 
+                            <i class="fa fa-angle-right" slot="end" style="color:#A7A7A7"></i>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    <ion-menu-toggle auto-hide="false" >
+                        <ion-item  (click)="sair()" routerDirection="root" >                       
+                            Sair 
+                            <i class="fa fa-angle-right" slot="end" style="color:#A7A7A7"></i>
+                        </ion-item>
+                    </ion-menu-toggle>
+                    
+                </ion-list>
+            </div>
+        </ion-content>
+    </ion-menu>
+    <ion-router-outlet id="content" main>
+
+
+    </ion-router-outlet>
+    
+  
+    <ion-menu menuid="notificacao" side="end" contentId="content">
+        <ion-content>
+            <div style="padding:20px 10px 20px 20px;">
+                <div class="sidemenu sidemenu-right" id="sideRight" style="display: block !important; right:0px !important; width:100% !important;">
+                    <!-- FECHAR SIDEMENU -->
+                    <div class="voltar-fechar-sidemenu">
+                        <a href="javascript:void(0)" title="Fechar"  auto-hide="false" (click)="closeMenu()" >
+                        <img src="/assets/images/voltar-direcao-direita.svg" alt="Fechar">
+                        </a>
+                    </div>
+                    <!-- FECHAR SIDEMENU -->
+                    <!-- NOTIFICAÇÕES -->
+                    <div id="loopNotificacoes" style="overflow: auto;height: 100%;padding-right: 10px;margin-top:0;padding-top: 26px;">
+                
+                        <!-- NOTIFICAÇÃO -->
+                        <div class="notificacao" *ngFor="let x of notificacoes" [hidden]="isHorario(x.horario)">
+                            <span class="tempo-notificacao">{{x.titulo}}</span>
+                            <p class="texto-notificacao">{{x.mensagem}}</p>                
+                            <p class="actions-notificacao">                
+                            <button type="button" class="btn btn-default" *ngIf="(x.tipo=='notificacao')" (click)="lerNotificacao(x.id)">MARCAR LIDO</button> 
+                            <button type="button" class="btn btn-primary" *ngIf="(x.tipo=='passeio' || x.tipo=='rota') && x.confirmar==1 && x.podeiniciar==1" (click)="iniciarTrajeto(x.tipo,x.id)">INICIAR</button> 
+                            <button type="button" class="btn btn-primary" *ngIf="(x.tipo=='passeio' || x.tipo=='rota') && x.confirmar==1 && x.podeiniciar==0" >Você pode iniciar às {{x.horario}}</button> 
+                            <button type="button" class="btn btn-primary" *ngIf="(x.tipo=='passeio' || x.tipo=='rota') && x.confirmar==0 && x.admin!=0" (click)="confirmar(x.tipo,x.id,1)">CONFIRMAR PARTICIPAÇÃO</button>                
+                            <button type="button" class="btn btn-default" *ngIf="(x.tipo=='passeio' || x.tipo=='rota') && x.confirmar==0 && x.admin!=0" (click)="confirmar(x.tipo,x.id,2)">NÃO IREI HOJE</button>                
+                            <button type="button" class="btn btn-default" *ngIf="(x.tipo=='passeio' || x.tipo=='rota') && x.tipo==rota && x.admin==1" (click)="cancelarRota(x.tipo,x.id)">CANCELAR ROTA HOJE</button>                 
+                            </p>                
+                        </div>
+                        <!-- NOTIFICAÇÃO -->
+                
+                
+                    </div>
+                    <!-- NOTIFICAÇÕES -->
+                </div>
+            </div>
+        </ion-content>
+    </ion-menu>
+  
+</ion-split-pane>

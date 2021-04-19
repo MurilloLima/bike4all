@@ -1,0 +1,199 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-button>
+        <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Passeios</ion-title>
+
+  </ion-toolbar>
+</ion-header>
+
+<!-- HEADER -->
+
+<ion-content>
+
+  
+<!-- CONTENT -->
+<section class="content content-gray content-performance" style="overflow: auto;">   
+
+
+ <!-- CONTEÚDO DAS ABAS -->
+  <div class="tab-content" id="tabsPerformance" [hidden]="isdetalhes">
+
+        <!-- GERAL -->
+        <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">    
+             <h3 class="subtitulo" style="color: #DB541E;padding-left: 10px;margin-top: 0px;">{{dados.data}}</h3>     
+             <h3 class="titulo" style="margin-bottom: 22px;padding-left: 10px;padding-right: 10px;margin-top: -9px;">{{dados.nome}}</h3>           
+             <!-- GRAFICOS E ESTATISTICAS -->
+             <div class="graficos" style="overflow: hidden;padding-top: 0;">
+                   <!-- LINHA DOIS -->
+                   <div class="row linha-dois">
+                      <div class="col">
+                        <h2>
+                          <small>TEMPO</small>
+                          <span>{{convertTempo(dados.tempo,'horas')}}</span>
+                        </h2>
+                      </div>
+                      <div class="col">
+                        <h2>
+                          <small>VELOC. MÉDIA</small>
+                          <span>{{dados.velocidademedia}}<u>km/h</u></span>
+                        </h2>
+                      </div>
+                      <div class="col">
+                        <h2>
+                          <small>DISTÂNCIA</small>
+                          <span>{{dados.distancia}}<u>KM</u> </span>
+                        </h2>
+                      </div>
+                      <div class="col">
+                        <h2>
+                          <small>CALORIAS</small>
+                          <span>{{dados.calorias}} </span>
+                        </h2>
+                      </div>
+                   </div>
+                   <!-- LINHA DOIS -->
+              </div>
+              
+              <div class="graficos">
+                <h3 class="subtitulo">Desempenho geral</h3>
+                <table class="table">
+                  <tbody>
+                    <tr>
+                      <td colspan="2" style="text-align: center;">
+                        <canvas id="graficoElevacaoPerformancePasseio" style="max-width: 350px;width: 100%;"></canvas></td>
+                    </tr>
+                    <tr>
+                      <td>Melhor tempo</td>
+                      <td>{{convertTempo(dados.melhortempo,'horas')}} </td>
+                    </tr>
+                    <tr>
+                      <td>Melhor km</td>
+                      <td>{{dados.melhorkm}} km</td>
+                    </tr>
+                    <tr>
+                      <td>Média tempo/km</td>
+                      <td>{{convertTempo(dados.mediatempo,'horas')}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="actions-loop-comunidade" style="margin-top: 12px;padding-top: 5px;padding-bottom: 7px;border-top: 1px solid #DEDEDE;text-align: right;padding-left: 0;padding-right: 0;width: 93%;margin-left: auto;margin-right: auto;background: #fff;">
+                  <a href="javascript:void(0)" (click)="isdetalhes=true;" style="color: #A7A7A7;font-size: 14px;text-decoration: none;">
+                     Ver detalhes por km <i class="fa fa-angle-right"></i>
+                  </a>
+                </div>
+              </div>
+              <!-- LINHA DOIS -->
+                <!-- GRAFICOS E ESTATISTICAS -->
+              </div>
+              
+             
+             <!-- RESUMO-->
+             <div class="graficos">
+                  <table class="table">
+                       <thead>
+                         <th colspan="2">
+                           Detalhes
+                         </th>
+                       </thead>
+                       <tbody>
+                          <tr>
+                            <td>Distância</td>
+                            <td>{{dados.distancia }} km</td>
+                          </tr>
+                          <tr>
+                            <td>Tempo</td>
+                            <td>{{convertTempo(dados.tempo,'horas')}}</td>
+                          </tr>
+                          <tr>
+                            <td>Pedaladas</td>
+                            <td>{{dados.pedaladas}}</td>
+                          </tr>
+                          <tr>
+                            <td>Calorias</td>
+                            <td>{{dados.calorias}} cal</td>
+                          </tr>
+                       </tbody>
+                   </table>
+
+                   <table class="table">
+                       <tbody>
+                          <tr>
+                            <td>Ganho de elevação</td>
+                            <td>{{dados.ganhoelevacao}}</td>
+                          </tr>
+                          <tr>
+                            <td>Maior elevação</td>
+                            <td>{{dados.maiorelevacao}}</td>
+                          </tr>
+                          <tr>
+                            <td>Menor elevação</td>
+                            <td>{{dados.menorelevacao}}</td>
+                          </tr>
+                       </tbody>
+                   </table>
+
+                   <table class="table">
+                       <tbody>
+                          <tr>
+                            <td>Melhor tempo</td>
+                            <td>{{convertTempo(dados.melhortempo,'horas')}}</td>
+                          </tr>
+                          <tr>
+                            <td>Maior distância</td>
+                            <td>{{dados.maiordistancia}} km</td>
+                          </tr>
+                          <tr>
+                            <td>Velocidade média</td>
+                            <td>{{dados.velocidademedia}} km/h</td>
+                          </tr>
+                       </tbody>
+                   </table>
+
+            </div>
+            <!-- RESUMO -->
+       <!-- GERAL -->
+
+
+  </div>
+  <!-- CONTEÚDO DAS ABAS -->
+  
+ <!-- CONTEÚDO DAS ABAS -->
+<div class="tab-content" id="tabskm" [hidden]="!isdetalhes">
+  <!-- GERAL -->
+  <div class="tab-pane fade show active" id="geral" role="tabpanel" aria-labelledby="geral-tab">    
+    
+    <div class="graficos">
+      <h3 class="subtitulo">Desempenho por km</h3>
+      <table class="table">
+        <tbody>
+          <tr *ngFor="let x of detalhes">
+            <td>{{x.kmfinal}} km </td>
+            <td>{{convertTempo(x.tempo,'horas')}} </td>
+            <td>
+              <div class="progress" style="width: 200px;">
+                <div class="progress-bar" role="progressbar" 
+                [style.width]="x.percentual + '%'"  aria-valuemin="0" aria-valuemax="100">
+                  <div class="bolinha-enfeite"></div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          <tr>
+            <td colspan="3">Tempo médio: {{convertTempo(dados.mediatempo,'horas')}}  </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <!-- LINHA DOIS -->
+    <!-- GRAFICOS E ESTATISTICAS -->
+  </div>
+</div>
+<!-- CONTEÚDO DAS ABAS -->
+</section>
+<!-- CONTENT -->
+ 
+</ion-content>

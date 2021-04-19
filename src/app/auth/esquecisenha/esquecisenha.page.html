@@ -1,0 +1,25 @@
+
+<ion-content>
+    <div class="ion-padding">
+        <div class="ion-text-center ion-padding-top">
+            <img src="/assets/img/logo_app.png" />
+        </div>
+
+        <div class="ion-text-center ">
+            Informe seu e-mail para recuperar a senha
+
+            <ion-item>
+                <ion-label position="floating">E-mail </ion-label>
+                <ion-input type="email" ng-model="email"></ion-input>
+            </ion-item>
+
+        </div>
+
+        <div class="ion-text-center ion-padding-top">
+            <br /><button (click)="recuperar()"><img src="/assets/img/bt_entrar.png" /></button>
+        </div>
+        <div class="ion-text-center ion-padding-top">
+            <button (click)="voltar()">Voltar</button>
+        </div>
+    </div>
+</ion-content>

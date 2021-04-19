@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="31.455" height="31.456" viewBox="0 0 31.455 31.456">
+  <defs>
+    <filter id="Caminho_654" x="0" y="0" width="25.799" height="25.799" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur"/>
+      <feFlood flood-opacity="0.259"/>
+      <feComposite operator="in" in2="blur"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+    <filter id="Caminho_647" x="9.898" y="9.899" width="21.557" height="21.556" filterUnits="userSpaceOnUse">
+      <feOffset input="SourceAlpha"/>
+      <feGaussianBlur stdDeviation="1" result="blur-2"/>
+      <feFlood flood-opacity="0.259"/>
+      <feComposite operator="in" in2="blur-2"/>
+      <feComposite in="SourceGraphic"/>
+    </filter>
+  </defs>
+  <g id="Grupo_894" data-name="Grupo 894" transform="translate(7646.116 -4025.387) rotate(135)">
+    <g transform="matrix(-0.71, -0.71, 0.71, -0.71, 8253, 2560.24)" filter="url(#Caminho_654)">
+      <g id="Caminho_654-2" data-name="Caminho 654" transform="translate(22.8 12.9) rotate(135)" fill="#fff">
+        <path d="M 7 13.39999961853027 C 3.471029996871948 13.39999961853027 0.6000000238418579 10.52896976470947 0.6000000238418579 7 C 0.6000000238418579 3.471029996871948 3.471029996871948 0.6000000238418579 7 0.6000000238418579 C 10.52896976470947 0.6000000238418579 13.39999961853027 3.471029996871948 13.39999961853027 7 C 13.39999961853027 10.52896976470947 10.52896976470947 13.39999961853027 7 13.39999961853027 Z" stroke="none"/>
+        <path d="M 7 1.199999809265137 C 3.801870346069336 1.199999809265137 1.199999809265137 3.801870346069336 1.199999809265137 7 C 1.199999809265137 10.19812965393066 3.801870346069336 12.80000019073486 7 12.80000019073486 C 10.19812965393066 12.80000019073486 12.80000019073486 10.19812965393066 12.80000019073486 7 C 12.80000019073486 3.801870346069336 10.19812965393066 1.199999809265137 7 1.199999809265137 M 7 0 C 10.86598968505859 0 14 3.134010314941406 14 7 C 14 10.86598968505859 10.86598968505859 14 7 14 C 3.134010314941406 14 0 10.86598968505859 0 7 C 0 3.134010314941406 3.134010314941406 0 7 0 Z" stroke="none" fill="#db541e"/>
+      </g>
+    </g>
+    <g transform="matrix(-0.71, -0.71, 0.71, -0.71, 8253, 2560.24)" filter="url(#Caminho_647)">
+      <path id="Caminho_647-2" data-name="Caminho 647" d="M7,0l7,8S10.5,5.488,7,5.488,0,8,0,8Z" transform="translate(28.45 18.56) rotate(135)" fill="#db541e"/>
+    </g>
+  </g>
+</svg>

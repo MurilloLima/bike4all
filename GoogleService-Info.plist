@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>507568018642-hm8htue7iq41ob8qvsvq0o0t429s7f8j.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.507568018642-hm8htue7iq41ob8qvsvq0o0t429s7f8j</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAIvxOB7kQ3PqK8hHeZhjLh5hHcKBgWJM0</string>
+	<key>GCM_SENDER_ID</key>
+	<string>507568018642</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.mangu.Bike4All</string>
+	<key>PROJECT_ID</key>
+	<string>bike4all-f475e</string>
+	<key>STORAGE_BUCKET</key>
+	<string>bike4all-f475e.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:507568018642:ios:852471177f25a0558c490b</string>
+	<key>DATABASE_URL</key>
+	<string>https://bike4all-f475e.firebaseio.com</string>
+</dict>
+</plist>

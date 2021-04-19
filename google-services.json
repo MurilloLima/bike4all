@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "507568018642",
+    "firebase_url": "https://bike4all-f475e.firebaseio.com",
+    "project_id": "bike4all-f475e",
+    "storage_bucket": "bike4all-f475e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:507568018642:android:d02441119abbbf768c490b",
+        "android_client_info": {
+          "package_name": "com.mangu.Bike4All"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "507568018642-59hrv80n1130cg69kl8ppi43jbnpueuo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.mangu.Bike4All",
+            "certificate_hash": "6294c4ac971efc6d53f6b8499598760f44e912ad"
+          }
+        },
+        {
+          "client_id": "507568018642-7c4gep0et4vjsgnqpulbtu74092oet3s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDn2YI8tYO7zOKzVhQ2sjuKotWxc3jjB74"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "507568018642-7c4gep0et4vjsgnqpulbtu74092oet3s.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "507568018642-hm8htue7iq41ob8qvsvq0o0t429s7f8j.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.mangu.Bike4All"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

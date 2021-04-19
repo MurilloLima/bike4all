@@ -1,0 +1,57 @@
+﻿
+<ion-content>
+    <div class="ion-padding">
+        <div class="ion-text-center ion-padding-top">
+            <img src="/assets/img/logo_app.png" />
+        </div>
+
+        <form #form="ngForm" (ngSubmit)="register(form)">
+            <ion-grid>
+                <ion-row color="primary" justify-content-center>
+                    <ion-col align-self-center size-md="6" size-lg="5" size-xs="12">
+                        <div text-center>
+                            <h3>Complete seu cadastro</h3>
+                        </div>
+                        <div padding>
+                                    
+                            <ion-item>
+                                <ion-label position="floating">Seu nome</ion-label>
+                                <ion-input name="nome" type="text"  ngModel required></ion-input>
+                            </ion-item>
+                            
+                            <ion-item>
+                                <ion-label position="floating">Qual seu sexo?</ion-label>
+                                <ion-select name="sexo" ngModel required>
+                                    <ion-select-option value="f">Feminino</ion-select-option>
+                                    <ion-select-option value="m">Masculino</ion-select-option>
+                                </ion-select>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Data de Nascimento</ion-label>
+                                <ion-datetime name="dataNascimento" displayFormat="DD/MM/YY" ngModel required></ion-datetime>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Seu telefone</ion-label>
+                                <ion-input name="telefone" type="text"  ngModel required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">E-mail</ion-label>
+                                <ion-input name="email" type="text"  ngModel required></ion-input>
+                            </ion-item>
+                            <ion-item>
+                                <ion-label position="floating">Senha</ion-label>
+                                <ion-input name="senha" type="password" ngModel required></ion-input>
+                            </ion-item>
+                        </div>
+                        <div padding>
+                            <ion-button size="large" type="submit" [disabled]="form.invalid" expand="block">Cadastrar</ion-button>
+                        </div>
+                        <div padding>
+                            <ion-button size="large" (click)="voltar()" expand="block">Voltar</ion-button>
+                        </div>
+                    </ion-col>
+                </ion-row>
+            </ion-grid>
+        </form>
+    </div>
+</ion-content>

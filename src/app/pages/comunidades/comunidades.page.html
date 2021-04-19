@@ -1,0 +1,240 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button>
+        <img src="/assets/images/toggle-nav-left.svg" alt="Abrir menu" />
+      </ion-menu-button>
+    </ion-buttons>
+    <ion-title>Comunidades</ion-title>
+    <ion-buttons slot="end">
+      <ion-button  (click)="openNotificacoes()">
+        <ion-icon name="notifications"></ion-icon>
+        <span class="noti">&bull;</span>
+      </ion-button>
+    </ion-buttons>    
+    <ion-buttons slot="end">
+      <ion-button (click)="openMeuPerfil()">
+        <img src="/assets/images/minha-conta.svg" alt="Minha Contas" />
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  
+
+
+<!-- CONTENT -->
+
+<section class="content content-gray content-atividades content-passeios">      
+
+  <!-- BUSCA PASSEIOS GERAL -->
+  <div class="busca-passeios-andamento">
+           <div class="row">
+               <div class="col-7">
+                   <div class="form-group has-feedback">
+                      <ion-input type="text" class="form-control" id="inputSearchPasseios" placeholder="Busque pelo local ou data"  [(ngModel)]="local"
+                      (ionChange)="loadDados(false)" style="float: left;padding-left: 24px;">
+                        <i class="fa fa-map-marker" style="position: absolute;top: 35px;"></i>
+                      </ion-input>
+                   </div>
+               </div>
+               <div class="col-5">
+                  <button type="button" class="btn btn-primary" (click)="criar()"><i class="fa fa-plus-circle"></i> Criar</button>
+               </div>
+           </div>
+  </div>
+  <!-- BUSCA PASSEIOS GERAL -->
+
+  <!-- LOOP COMUNIDADES -->
+  <div class="loop-comunidades" *ngIf="minhascomunidades!=null && minhascomunidades.length > 0">
+    <h3 class="subtitulo" style="margin-bottom: 22px;">Minhas comunidades</h3>  
+
+       <ion-slides pager="false" [options]="slideOpts">
+         <ion-slide *ngFor="let x of minhascomunidades">
+           <div class="item" (click)="openMinhaComunidade(x)">  
+             <div class="caixa-comunidade">
+               <div class="capa-comunidade" 
+               [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+               style="background-color: #f2f2f2;background-repeat:  no-repeat;background-size: cover;background-position: center center;">
+                   <a href="javascript:void(0)" title="Clique para ver mais detalhes sobre a comunidade">
+                     &nbsp;
+                   </a>
+               </div>
+               <h4>{{x.titulo}}</h4>
+               <p>
+                 <a href="javascript:void(0)" title="Total de ciclistas nessa comunidade">
+                   {{x.participantes}} Ciclistas
+                 </a>
+               </p>
+             </div>
+           </div>
+         </ion-slide>
+       </ion-slides>
+
+ </div>
+<!-- LOOP COMUNIDADES -->
+  
+  <!-- LOOP COMUNIDADES -->
+  <div class="loop-comunidades" *ngIf="comunidades !=null && comunidades.length > 0">
+     <h3 class="subtitulo" style="margin-bottom: 22px;">Comunidades que participa</h3>  
+
+        <ion-slides pager="false" [options]="slideOpts">
+          <ion-slide *ngFor="let x of comunidades">
+            <div class="item" (click)="openMinhaComunidade(x)">  
+              <div class="caixa-comunidade">
+                <div class="capa-comunidade" 
+                [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                style="background-color: #f2f2f2;background-repeat:  no-repeat;background-size: cover;background-position: center center;">
+                    <a href="javascript:void(0)" title="Clique para ver mais detalhes sobre a comunidade">
+                      &nbsp;
+                    </a>
+                </div>
+                <h4>{{x.titulo}}</h4>
+                <p>
+                  <a href="javascript:void(0)" title="Total de ciclistas nessa comunidade">
+                    {{x.participantes}} Ciclistas
+                  </a>
+                </p>
+              </div>
+            </div>
+          </ion-slide>
+        </ion-slides>
+
+  </div>
+ <!-- LOOP COMUNIDADES -->
+
+  <!-- LOOP COMUNIDADES -->
+  <div class="loop-comunidades" *ngIf="comunidades_proxima!=null && comunidades_proxima.length > 0">
+      <h3 class="subtitulo" style="margin-bottom: 22px;">Comunidade(s) próxima(s) a você</h3>   
+      <ion-slides pager="false" [options]="slideOpts">
+        <ion-slide *ngFor="let x of comunidades_proxima">
+            <div class="item" (click)="openDetalhe(x)">            
+              <div class="caixa-comunidade">
+                <div class="capa-comunidade" 
+                    [style.backgroundImage]="'url(' + x.urlimagem + ')'" 
+                    style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                    <a href="javascript:void(0)" title="Clique para ver mais detalhes sobre a comunidade">
+                      &nbsp;
+                    </a>
+                </div>
+                <h4>{{x.titulo}}</h4>
+                <p>
+                  <a href="javascript:void(0)" title="Total de ciclistas nessa comunidade">
+                    {{x.participantes}} Ciclistas
+                  </a>
+                </p>
+              </div>
+          </div>
+          </ion-slide>
+      </ion-slides> 
+      
+      <!-- ACTIONS LOOP COMUNIDADE -->
+      <div class="actions-loop-comunidade" style="display: none;;">
+          <a href="javascript:void(0)" title="Ver todas as comunidades">
+             Ver todas as comunidades <i class="fa fa-angle-right"></i>
+          </a>
+      </div>
+      <!-- ACTIONS LOOP COMUNIDADE -->
+  </div>
+  <!-- LOOP COMUNIDADES -->
+
+  <h3 class="subtitulo" style="margin-bottom: 22px;margin-top: 42px;" *ngIf="rotas!=null && rotas.length > 0">Rotas próximas a você</h3>
+  <!-- LOOP ATIVIDADES -->
+  <div class="loop-atividades" style="padding-bottom: 0px;" *ngIf="rotas!=null && rotas.length > 0">    
+     <!-- ATIVIDADE SIMPLES -->
+     <div class="atividade atividade-simples" *ngFor="let x of rotas" (click)="openRota(x)"
+              style="background: #fff;filter: drop-shadow(0px 1px 3px rgba(0, 0, 0, 0.12));padding: 20px;">
+         <div class="row">
+            <!-- FOTO CAPA ATIVIDADE -->
+            <div class="col-3">
+                <div class="capa-atividade" 
+                    [style.backgroundImage]="'url(/assets/images/mapa.jpg)'" 
+                    style="background-color: #f2f2f2;background-repeat: no-repeat;background-size: cover;background-position: center center;">
+                   <a href="javascript:void(0)" title="DETALHES">
+                      &nbsp;
+                   </a>
+               </div>
+            </div>
+            <!-- CONTEUDO ATIVIDADE -->
+            <div class="col-9">
+                <h2>
+                 {{x.titulo}}
+                 <small>
+                  <span class="dataAtividade">{{ x.datadescricao }}</span> • 
+                  <span class="temperaturaAtividade">saída às {{x.horario}}</span>
+                  <span class="trajetoAtividade">{{ x.distancia }} Km</span>
+                 </small>
+               </h2>
+            </div>
+            <!-- CONTEUDO ATIVIDADE -->
+         </div>
+     </div>
+     <!-- ATIVIDADE SIMPLES -->
+  </div>
+
+  <!-- LOOP ATIVIDADES -->
+
+
+
+  
+
+
+
+ 
+
+
+
+
+
+
+
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+
+
+
+
+</section>
+
+<!-- CONTENT -->
+
+
+
+
+
+
+</ion-content>
+
+<ion-tabs>
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button routerLink="/home/atividades">
+      <img src="/assets/images/menu-atividades.svg" alt="Atividades">
+      <ion-label class="">Atividades</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/performance">
+      <img src="/assets/images/menu-performance.svg" alt="Performance"> 
+      <ion-label class="">Performance</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/mapa">
+      <img src="/assets/images/menu-mapa.svg" alt="Mapa"> 
+      <ion-label class="">Mapa</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/passeios">
+      <img src="/assets/images/menu-passeios.svg" alt="Passeios"> 
+      <ion-label class="">Passeios</ion-label>
+    </ion-tab-button>
+
+    <ion-tab-button routerLink="/home/comunidades" class="ativo" >
+      <img src="/assets/images/menu-comunidades-ativo.svg" alt="Comunidades"> 
+      <ion-label class="ativo">Comunidade</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>

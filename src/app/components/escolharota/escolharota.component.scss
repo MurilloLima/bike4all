@@ -1,0 +1,17 @@
+ion-content, ion-header {
+    --ion-background-color:rgba(113, 113, 113, 0.9);
+}
+ion-button {
+    --background: #062f77;
+    text-transform: uppercase;
+}
+
+ion-content hr{
+    background-color:#e3e3e3;
+}
+ion-modal, ion-backdrop {
+    background: rgba(113, 113, 113, 0.9);
+    background-color: rgba(113, 113, 113, 0.9);
+    --ion-background-color: rgba(113, 113, 113, 0.9);
+    --ion-backdrop-color: rgba(113, 113, 113, 0.9);
+}

@@ -1,0 +1,15 @@
+ion-content {
+    --ion-background-color: transparent;
+    background-image: url(/assets/images/bg.jpg) !important;
+    --ion-padding: 20px;
+}
+
+.logo {
+    text-align: center !important;
+    --padding-top: 20px;
+}
+
+ion-spinner {
+    width: 80px !important;
+    height: 80px !important;
+}

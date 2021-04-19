@@ -1,0 +1,185 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start" (click)="voltar()">
+      <ion-button>
+        <img src="/assets/images/header-voltar.svg" alt="Abrir menu" />
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Comunidades</ion-title> 
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<!-- CONTENT -->
+<section class="content content-gray content-atividades content-passeios">      
+
+ <!-- UPLOAD FOTO DE DESTAQUE -->
+ <div class="upload-foto-destaque">
+  <div class="row">
+     <div class="col-12">
+         <div class="form-group" style="margin-bottom: 1px;">
+            <label>Foto de destaque</label>
+         </div>
+     </div>
+  </div>
+  <div class="row" (click)="selectImage()">
+     <div class="col-2">
+         <a href="javascript:void(0)" title="Adicionar foto de destaque ao passeio">
+            <img src="/assets/images/add-photo-passeio.png" alt="Adicionar foto de destaque ao passeio">
+        </a>
+     </div>
+     <div class="col-10">
+        Adicionar foto de destaque
+     </div>
+  </div>
+  
+  <div class="row" *ngIf="fotoUrl">
+    <div class="col-12">
+       <img [src]="fotoUrl" style="max-height: 200px;"  (click)="selectImage()"/>
+    </div>
+  </div>
+</div>
+ <!-- UPLOAD FOTO DE DESTAQUE --> 
+
+<!-- NOME DO PASSEIO-->
+ <div class="busca-passeios-andamento ajuste-padding">
+     <div class="row">
+        <div class="col-12">
+           <div class="form-group">
+              <label>Nome</label>
+              <input type="text" class="form-control" [(ngModel)]="cadastro.titulo" placeholder="Dê um nome ao seu passeio">
+           </div>
+        </div>              
+     </div>
+ </div>
+ 
+ <div class="busca-passeios-andamento ajuste-padding">
+  <div class="row">
+     <div class="col-12">
+           <div class="form-group">
+              <label>Descrição</label>
+              <textarea class="form-control" [(ngModel)]="cadastro.descricao" rows="5" placeholder="Informe a descrição do evento."></textarea>
+           </div>
+     </div>           
+  </div>
+</div>
+
+<div class="busca-passeios-andamento ajuste-padding">
+
+    <!-- LINHA -->
+    <div class="row">
+      <div class="col-6">
+          <div class="form-group">
+              <label>Cidade</label>
+              <input type="text" class="form-control" placeholder="Cidade" [(ngModel)]="cadastro.cidade">
+          </div>
+      </div>
+      <div class="col-6">
+        <div class="form-group">
+              <label>Estado</label>
+              <select name="estado" class="form-control" [(ngModel)]="cadastro.uf" >
+                <option value="">Selecione um estado</option>
+                <option value="AC">Acre</option>
+                <option value="AL">Alagoas</option>
+                <option value="AP">Amapá</option>
+                <option value="AM">Amazonas</option>
+                <option value="BA">Bahia</option>
+                <option value="CE">Ceará</option>
+                <option value="DF">Distrito Federal</option>
+                <option value="ES">Espírito Santo</option>
+                <option value="GO">Goiás</option>
+                <option value="MA">Maranhão</option>
+                <option value="MT">Mato Grosso</option>
+                <option value="MS">Mato Grosso do Sul</option>
+                <option value="MG">Minas Gerais</option>
+                <option value="PA">Pará</option>
+                <option value="PB">Paraíba</option>
+                <option value="PR">Paraná</option>
+                <option value="PE">Pernambuco</option>
+                <option value="PI">Piauí</option>
+                <option value="RJ">Rio de Janeiro</option>
+                <option value="RN">Rio Grande do Norte</option>
+                <option value="RS">Rio Grande do Sul</option>
+                <option value="RO">Rondônia</option>
+                <option value="RR">Roraima</option>
+                <option value="SC">Santa Catarina</option>
+                <option value="SP">São Paulo</option>
+                <option value="SE">Sergipe</option>
+                <option value="TO">Tocantins</option>
+              </select>
+          </div>
+      </div>
+  </div>
+  <!-- LINHA -->
+</div>
+
+ <!-- NOME DO PASSEIO -->   
+
+ <!-- PÚBLICO OU PRIVADO -->
+ <div class="upload-foto-destaque privacidade-passeio" style="padding-bottom:120px;">  
+   <div class="row">
+      <div class="col-2">
+          <a href="javascript:void(0)" title="Privacidade do passeio">
+             <img src="/assets/images/publico.svg" alt="Privacidade do passeio">
+          </a>
+      </div>
+      <div class="col-8">
+         Público
+         <small>Qualquer ciclista pode participar do passeio.</small>
+      </div>
+      <div class="col-2 actions-privacidade">                        
+           <div class="form-check">
+             <input class="form-check-input" type="radio"  [(ngModel)]="cadastro.privacidade" name="privacidade" value="publico" id="privacidadePublico">
+             <label class="form-check-label" for="privacidadePublico">
+             </label>
+           </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-2">
+          <a href="javascript:void(0)" title="Privacidade do passeio">
+             <img src="/assets/images/privado.svg" alt="Privacidade do passeio">
+          </a>
+      </div>
+      <div class="col-8">
+         Privado
+         <small>Somente os ciclistas convidados poderão participar do passeio.</small>
+      </div>
+      <div class="col-2 actions-privacidade">                        
+           <div class="form-check">
+             <input class="form-check-input" type="radio"  [(ngModel)]="cadastro.privacidade" name="privacidade" value="privado" id="privacidadePrivado">
+             <label class="form-check-label" for="privacidadePrivado">
+             </label>
+           </div>
+      </div>
+   </div>
+
+ </div>
+ <!-- PÚBLICO OU PRIVADO -->
+ 
+<!-- CONVIDAR MEMBROS -->
+ <div class="upload-foto-destaque privacidade-passeio" style="display: none;"> 
+   <div class="row">
+      <div class="col-2">
+          <a href="javascript:void(0)" title="Convidar membros">
+             <img src="/assets/images/convidar-membros.svg" alt="Convidar membros" style="margin-top: 8px;">
+          </a>
+      </div>
+      <div class="col-10">
+         Convidar membros
+         <small>Convide os alguns ciclistas para participar.</small>
+      </div>      
+   </div>
+ </div>
+ <!-- CONVIDAR MEMBROS -->
+
+<!-- AREA BTN CRIAR PASSEIO -->
+<div class="area-btn-criar-passeio" style="bottom:0px; ">
+<a href="javascript:void(0)" title="CRIAR COMUNIDADE" class="btn btn-primary" (click)="salvarDados()">{{ (cadastro.id !=undefined && cadastro.id!="0" && cadastro.id!="" ? "SALVAR ALTERAÇÕES" : "CRIAR COMUNIDADE") }}</a>
+</div>
+<!-- AREA BTN CRIAR PASSEIO -->
+</section>
+<!-- CONTENT -->
+
+</ion-content>
